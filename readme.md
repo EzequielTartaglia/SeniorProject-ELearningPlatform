@@ -8,7 +8,7 @@ Ezequiel Matias Tartaglia, Thompson Arnold Nkomo, Josue Sinaca Gomez, Irvin Jose
   - Ezequiel Matias Tartaglia:
 
   ```bash
-
+    "There is always a better way – your challenge is to find it." — Frank Bunker Gilbreth
   ```
 
   - Thompson Arnold Nkomo:
