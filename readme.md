@@ -20,7 +20,7 @@ Ezequiel Matias Tartaglia, Thompson Arnold Nkomo, Josue Sinaca Gomez, Irvin Jose
   - Josue Sinaca Gomez:
 
   ```bash
-  
+    "There's so much todo. And there's never enough time..." - The 7 habits of highly effective people
   ```
 
   - Irvin Jose Silva:
