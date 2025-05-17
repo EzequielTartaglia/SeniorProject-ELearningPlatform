@@ -1,34 +1,28 @@
-Crear projecto en nextjs con PostgreSQL
+Create NextJS project with PostgreSQL
 
-1) Descargar node.js e instalar.
+1) Download and install Node.js.
 
-2) crear entorno de trabajo de nextjs con el comando:  npx create-next-app "nombre del projecto"
+2) Create NextJS working environment with the command: npx create-next-app "project name"
 
-3) Crear db en supabase.
+3) Create database in Supabase.
 
-4) Configurar la conexion en utils y asignar las .envs
+4) Configure the connection in utils and set up .env variables
 
 //desarrollos.odin@gmail.com
 //sistema_odin_db_Developer.500
 
-//sistemas.bohemian@gmail.com
-//bohemian_db_Developer.500
+5) Create an IMGBB account and assign the apikey to NEXT_PUBLIC_IMGBB_API_KEY
+    - Create account at https://imgbb.com/
+    - Get api_key at https://api.imgbb.com/
+    - Assign it to NEXT_PUBLIC_IMGBB_API_KEY
 
-//sistemas.daslabor@gmail.com
-//das_labor_db_Developer.500
+6) Create manifest file to transform the web into a progressive web app (PWA)
+    - Generate manifest at https://www.simicart.com/manifest-generator.html/ (or another generator)
+    - Unzip the file in /public
+    - Change manifest.webmanifest name to manifest.json
 
-5) Crear una cuenta en IMGBB y asignar la apikey a NEXT_PUBLIC_IMGBB_API_KEY
-    - Crear cuenta en https://imgbb.com/
-    - Obtener api_key en https://api.imgbb.com/
-    - Asignarla a NEXT_PUBLIC_IMGBB_API_KEY
+7) Create a Resend account (with the email that will receive messages) and assign the apikey to NEXT_PUBLIC_EMAIL_API_KEY
 
-6) Crear el archivo manifest para transformar la web a web progresiva (pwa) 
-    - Generar el manifest en https://www.simicart.com/manifest-generator.html/ (u otro generador)
-    - Descomprimir el archivo en /public
-    - Cambiar el nombre de manifest.webmaniest a manifest.json
-
-7) Crear una cuenta en resend (con el mail al cual llegaran los mensajes) y asignar la apikey a NEXT_PUBLIC_EMAIL_API_KEY
-
-    - Crear cuenta en https://resend.com/login
-    - Obtener api_key 
-    - Asignarla a NEXT_PUBLIC_EMAIL_API_KEY
+    - Create account at https://resend.com/login
+    - Get api_key
+    - Assign it to NEXT_PUBLIC_EMAIL_API_KEY
