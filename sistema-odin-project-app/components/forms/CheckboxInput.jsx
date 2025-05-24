@@ -9,7 +9,7 @@ const CheckboxInput = ({ id, name, label, checked, onChange }) => {
         onChange={onChange}
         className="mr-2"
       />
-      <label htmlFor={id} className="text-primary">
+      <label htmlFor={id} className="text-primary font-semibold">
         {label}
       </label>
     </div>
