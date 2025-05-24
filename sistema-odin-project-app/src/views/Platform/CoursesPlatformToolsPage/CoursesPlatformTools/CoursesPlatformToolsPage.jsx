@@ -3,7 +3,7 @@
 import {
   getCoursePlatformTools,
   deleteCoursePlatformTool,
-} from "@/src/models/platform/course_platform_tool/course_platform_tool";
+} from "@/src/controllers/platform/course_platform_tool/course_platform_tool";
 
 import { useNotification } from "@/contexts/NotificationContext";
 import { useUserInfoContext } from "@/contexts/UserInfoContext";

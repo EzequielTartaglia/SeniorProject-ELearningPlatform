@@ -14,7 +14,9 @@ export default function ExamDetailCard({
   return (
     <div className="box-theme">
       <div className="mb-4">
-        <h3 className="text-lg font-semibold text-primary">Título del Examen:</h3>
+        <h3 className="text-lg font-semibold text-primary">
+          Título del Examen:
+        </h3>
         <p className="text-primary">{title}</p>
       </div>
 
@@ -30,16 +32,18 @@ export default function ExamDetailCard({
 
       <div className="mb-4">
         <h3 className="text-lg font-semibold text-primary">
-        Puntaje maximo posible:
+          Puntaje maximo posible:
         </h3>
-        <p className="text-primary">{totalPoints}</p>
+        <p className="text-primary">{totalPoints.toFixed(2)}</p>
       </div>
-      
+
       <div className="mb-4">
         <h3 className="text-lg font-semibold text-primary">
-        Puntaje minimo para aprobar:
+          Puntaje minimo para aprobar:
         </h3>
-        <p className="text-primary">{(totalPoints * minScore) / 100} ({minScore} %)</p>
+        <p className="text-primary">
+          {((totalPoints * minScore) / 100).toFixed(2)} ({minScore} %)
+        </p>
       </div>
 
       <div className="flex justify-end">
@@ -47,7 +51,7 @@ export default function ExamDetailCard({
           <Button
             customClasses="flex items-center shadow-none text-title-active"
             route={editRoute}
-            icon={<FiEdit size={24}/>}
+            icon={<FiEdit size={24} />}
             isAnimated={false}
             title="Editar datos generales"
           />

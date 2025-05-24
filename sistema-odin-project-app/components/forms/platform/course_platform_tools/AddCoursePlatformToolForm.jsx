@@ -1,6 +1,6 @@
 "use client";
 
-import { addCoursePlatformTool } from "@/src/models/platform/course_platform_tool/course_platform_tool";
+import { addCoursePlatformTool } from "@/src/controllers/platform/course_platform_tool/course_platform_tool";
 
 import { useNotification } from "@/contexts/NotificationContext";
 import { useState } from "react";
@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 import Input from "@/components/forms/Input";
 import PageHeader from "@/components/page_formats/PageHeader";
-import SubmitLoadingButton from "../../SubmitLoadingButton";
+import SubmitLoadingButton from "@/components/forms/SubmitLoadingButton";
 
 export default function AddCoursePlatformToolForm() {
   const [coursePlatformTool, setCoursePlatformTool] = useState({

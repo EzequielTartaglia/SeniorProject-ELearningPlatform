@@ -34,14 +34,14 @@ export default function TrustedBrandsSection() {
       <Title
         text="Empresas que ya confiaron en nosotros"
         textPositionClass="text-center"
-        textColorClass="text-black"
+        textColorClass="text-blue-500"
         customClasses="mb-4"
       />
 
       <Subtitle
-        text="Marcas que Avalan Nuestra Experiencia y Compromiso"
+        text="Marcas que avalan nuestra experiencia y compromiso"
         textPositionClass="text-center"
-        textColorClass="text-gray-700"
+        textColorClass="text-blue-500"
         marginPositionClasses="mt-4 mb-8"
         customClasses="text-lg"
       />

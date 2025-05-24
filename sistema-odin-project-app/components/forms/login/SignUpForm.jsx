@@ -3,14 +3,15 @@
 import {
   addPlatformUser,
   checkEmailExists,
-} from "@/src/models/platform/platform_user/platform_user";
-import { getPlatformUserRoles } from "@/src/models/platform/platform_user_role/platform_user_role";
-import { getCountries } from "@/src/models/platform/country/country";
-import { getPlatformUserGenders } from "@/src/models/platform/platform_user_gender/platform_user_gender";
+} from "@/src/controllers/platform/platform_user/platform_user";
+import { getPlatformUserRoles } from "@/src/controllers/platform/platform_user_role/platform_user_role";
+import { getCountries } from "@/src/controllers/platform/country/country";
+import { getPlatformUserGenders } from "@/src/controllers/platform/platform_user_gender/platform_user_gender";
 
 import { useNotification } from "@/contexts/NotificationContext";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useUserInfoContext } from "@/contexts/UserInfoContext";
 
 import Input from "@/components/forms/Input";
 import PageHeader from "@/components/page_formats/PageHeader";
@@ -18,7 +19,10 @@ import SubmitLoadingButton from "@/components/forms/SubmitLoadingButton";
 import SelectInput from "@/components/forms/SelectInput";
 
 export default function SignUpForm() {
-  const [user, setUser] = useState({
+
+    const { user } = useUserInfoContext();
+  
+  const [newUser, setNewUser] = useState({
     first_name: "",
     last_name: "",
     platform_user_gender_id: null,
@@ -30,6 +34,8 @@ export default function SignUpForm() {
     username: "",
     user_role_id: "",
     birthdate: null,
+    platform_user_business_id: null,
+    created_by_user_id: null,
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -81,43 +87,43 @@ export default function SignUpForm() {
 
     let errors = {};
 
-    if (!user.first_name) {
+    if (!newUser.first_name) {
       errors.first_name = "Campo obligatorio";
     }
 
-    if (!user.last_name) {
+    if (!newUser.last_name) {
       errors.last_name = "Campo obligatorio";
     }
 
-    if (!user.email) {
+    if (!newUser.email) {
       errors.email = "Campo obligatorio";
     }
 
-    if (!user.phone) {
+    if (!newUser.phone) {
       errors.phone = "Campo obligatorio";
     }
 
-    if (!user.password) {
+    if (!newUser.password) {
       errors.password = "Campo obligatorio";
     }
 
-    if (!user.username) {
+    if (!newUser.username) {
       errors.username = "Campo obligatorio";
     }
 
-    if (!user.user_role_id) {
+    if (!newUser.user_role_id) {
       errors.user_role_id = "Campo obligatorio";
     }
 
-    if (!user.platform_user_gender_id) {
+    if (!newUser.platform_user_gender_id) {
       errors.platform_user_gender_id = "Campo obligatorio";
     }
 
-    if (!user.country_id) {
+    if (!newUser.country_id) {
       errors.country_id = "Campo obligatorio";
     }
 
-    if (!user.birthdate) {
+    if (!newUser.birthdate) {
       errors.birthdate = "Campo obligatorio";
     }
 
@@ -132,7 +138,7 @@ export default function SignUpForm() {
     setIsLoading(true);
 
     try {
-      const emailExists = await checkEmailExists(user.email);
+      const emailExists = await checkEmailExists(newUser.email);
       if (emailExists) {
         showNotification(
           "Este correo electrónico ya está registrado. Por favor, intente con otro.",
@@ -143,17 +149,19 @@ export default function SignUpForm() {
       }
 
       await addPlatformUser(
-        user.first_name,
-        user.last_name,
-        user.platform_user_gender_id,
-        user.phone,
-        user.email,
-        user.country_id,
-        user.dni_ssn,
-        user.username,
-        user.password,
-        user.user_role_id,
-        user.birthdate
+        newUser.first_name,
+        newUser.last_name,
+        newUser.platform_user_gender_id,
+        newUser.phone,
+        newUser.email,
+        newUser.country_id,
+        newUser.dni_ssn,
+        newUser.username,
+        newUser.password,
+        newUser.user_role_id,
+        newUser.birthdate,
+        user.platform_user_business_id,
+        user.id
       );
 
       showNotification("¡Usuario registrado exitosamente!", "success");
@@ -171,7 +179,7 @@ export default function SignUpForm() {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    setUser((prevUser) => ({
+    setNewUser((prevUser) => ({
       ...prevUser,
       [name]: value,
     }));
@@ -191,22 +199,22 @@ export default function SignUpForm() {
         <Input
           label="Nombre"
           name="first_name"
-          value={user.first_name}
+          value={newUser.first_name}
           required={true}
           placeholder=""
           onChange={handleInputChange}
-          isSubmitted={isSubmitted && !user.first_name}
+          isSubmitted={isSubmitted && !newUser.first_name}
           errorMessage={formErrors.first_name}
         />
 
         <Input
           label="Apellido"
           name="last_name"
-          value={user.last_name}
+          value={newUser.last_name}
           required={true}
           placeholder=""
           onChange={handleInputChange}
-          isSubmitted={isSubmitted && !user.last_name}
+          isSubmitted={isSubmitted && !newUser.last_name}
           errorMessage={formErrors.last_name}
         />
 
@@ -214,20 +222,20 @@ export default function SignUpForm() {
           label="Fecha de nacimiento"
           name="birthdate"
           type="date"
-          value={user.birthdate}
+          value={newUser.birthdate}
           required={true}
           onChange={handleInputChange}
-          isSubmitted={isSubmitted && !user.birthdate}
+          isSubmitted={isSubmitted && !newUser.birthdate}
           errorMessage={formErrors.birthdate}
         />
 
         <SelectInput
           label="Género"
           name="platform_user_gender_id"
-          value={user.platform_user_gender_id}
+          value={newUser.platform_user_gender_id}
           required={true}
           onChange={handleInputChange}
-          isSubmitted={isSubmitted && !user.platform_user_gender_id}
+          isSubmitted={isSubmitted && !newUser.platform_user_gender_id}
           errorMessage={formErrors.platform_user_gender_id}
           table={genders}
           columnName="label"
@@ -237,32 +245,32 @@ export default function SignUpForm() {
         <Input
           label="Teléfono"
           name="phone"
-          value={user.phone}
+          value={newUser.phone}
           required={true}
           placeholder=""
           onChange={handleInputChange}
-          isSubmitted={isSubmitted && !user.phone}
+          isSubmitted={isSubmitted && !newUser.phone}
           errorMessage={formErrors.phone}
         />
 
         <Input
           label="Email"
           name="email"
-          value={user.email}
+          value={newUser.email}
           required={true}
           placeholder=""
           onChange={handleInputChange}
-          isSubmitted={isSubmitted && !user.email}
+          isSubmitted={isSubmitted && !newUser.email}
           errorMessage={formErrors.email}
         />
 
         <SelectInput
           label="País"
           name="country_id"
-          value={user.country_id}
+          value={newUser.country_id}
           required={true}
           onChange={handleInputChange}
-          isSubmitted={isSubmitted && !user.country_id}
+          isSubmitted={isSubmitted && !newUser.country_id}
           errorMessage={formErrors.country_id}
           table={countries}
           columnName="label"
@@ -272,7 +280,7 @@ export default function SignUpForm() {
         <Input
           label="Nº Seguro Social (DNI/SSN)"
           name="dni_ssn"
-          value={user.dni_ssn}
+          value={newUser.dni_ssn}
           placeholder=""
           onChange={handleInputChange}
           isSubmitted={isSubmitted}
@@ -281,11 +289,11 @@ export default function SignUpForm() {
         <Input
           label="Nombre de usuario"
           name="username"
-          value={user.username}
+          value={newUser.username}
           required={true}
           placeholder=""
           onChange={handleInputChange}
-          isSubmitted={isSubmitted && !user.username}
+          isSubmitted={isSubmitted && !newUser.username}
           errorMessage={formErrors.username}
         />
 
@@ -293,22 +301,22 @@ export default function SignUpForm() {
           label="Contraseña"
           name="password"
           type="password"
-          value={user.password}
+          value={newUser.password}
           required={true}
           placeholder=""
           onChange={handleInputChange}
-          isSubmitted={isSubmitted && !user.password}
+          isSubmitted={isSubmitted && !newUser.password}
           errorMessage={formErrors.password}
         />
 
         <SelectInput
           label="Rol de usuario"
           name="user_role_id"
-          value={user.user_role_id}
+          value={newUser.user_role_id}
           required={true}
           onChange={handleInputChange}
-          isSubmitted={isSubmitted && !user.user_role_id}
-          errorMessage={formErrors.user_role_id}
+          isSubmitted={isSubmitted && !newUser.user_role_id}
+          errorMessage={formErrors.newUser}
           table={platformUserRoles}
           columnName="label"
           idColumn="value"

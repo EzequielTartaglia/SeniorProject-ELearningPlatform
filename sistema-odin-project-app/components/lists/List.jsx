@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ReactDOM from "react-dom"; // Importa ReactDOM para el portal
 import {
   FiEye,
   FiEdit,
@@ -105,9 +106,9 @@ export default function List({
           {currentPageItems.map((item) => (
             <li
               key={item.id}
-              className="bg-primary rounded-md px-6 py-3 shadow-md transition duration-300 hover:-translate-y-1 bg-secondary w-full border-primary relative flex items-center justify-between"
+              className="rounded-md px-6 py-3 shadow-md transition duration-300 hover:-translate-y-1 bg-dark-mode w-full border-dark-mode relative flex items-center justify-between"
             >
-              <div className="flex items-center space-x-2 overflow-hidden truncate sm:truncate max-w-[400px]">
+              <div className="flex flex-col space-y-2 overflow-visible">
                 <div className="pr-16 sm:pr-16 md:pr-0 lg:pr-0">
                   <span>
                     {columnNameIsDate
@@ -228,12 +229,17 @@ export default function List({
         )}
       </div>
 
-      <ConfirmModal
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        onConfirm={confirmDelete}
-        message={confirmModalText}
-      />
+      {/* Render the modal outside of the main component using portal */}
+      {isModalOpen &&
+        ReactDOM.createPortal(
+          <ConfirmModal
+            isOpen={isModalOpen}
+            onClose={closeModal}
+            onConfirm={confirmDelete}
+            message={confirmModalText}
+          />,
+          document.body
+        )}
     </>
   );
 }

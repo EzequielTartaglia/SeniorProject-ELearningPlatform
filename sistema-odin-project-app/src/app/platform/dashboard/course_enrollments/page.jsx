@@ -3,11 +3,11 @@ import NotPermissionPage from "@/src/views/Platform/NotPermissionPage/NotPermiss
 import DashboardPage from "@/src/views/Platform/Dashboard/DashboardPage";
 
 export default function Dashboad() {
-    return (
-        <ConditionalSessionRender
-            AuthorizedUserRoles={[3, 4]}
-            ComponentIfUser={<DashboardPage/>}
-            ComponentIfNoUser={<NotPermissionPage/>}
-        />
-    );
+  return (
+    <ConditionalSessionRender
+      AuthorizedUserRoles={[3, 4, 5]}
+      ComponentIfUser={<DashboardPage />}
+      ComponentIfNoUser={<NotPermissionPage />}
+    />
+  );
 }

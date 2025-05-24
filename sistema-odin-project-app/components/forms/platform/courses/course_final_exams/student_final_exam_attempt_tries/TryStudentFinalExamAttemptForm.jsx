@@ -1,10 +1,10 @@
 "use client";
 
-import { getCourse } from "@/src/models/platform/course/course";
-import { checkStudentCourseEnrollment } from "@/src/models/platform/student_course_enrollment/student_course_enrollment";
-import { checkStudentCourseEnrollmentFinalExamAttempt } from "@/src/models/platform/student_course_enrollment_final_exam_attempt/student_course_enrollment_final_exam_attempt";
-import { getFinalExamQuestionsAndOptions } from "@/src/models/platform/course_final_exam_option_answer/course_final_exam_option_answer";
-import { addStudentCourseEnrollmentFinalExamAttemptTry } from "@/src/models/platform/student_course_enrollment_final_exam_attempt_try/student_course_enrollment_final_exam_attempt_try";
+import { getCourse } from "@/src/controllers/platform/course/course";
+import { checkStudentCourseEnrollment } from "@/src/controllers/platform/student_course_enrollment/student_course_enrollment";
+import { checkStudentCourseEnrollmentFinalExamAttempt } from "@/src/controllers/platform/student_course_enrollment_final_exam_attempt/student_course_enrollment_final_exam_attempt";
+import { getFinalExamQuestionsAndOptions } from "@/src/controllers/platform/course_final_exam_option_answer/course_final_exam_option_answer";
+import { addStudentCourseEnrollmentFinalExamAttemptTry } from "@/src/controllers/platform/student_course_enrollment_final_exam_attempt_try/student_course_enrollment_final_exam_attempt_try";
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -208,7 +208,7 @@ export default function TryStudentFinalExamAttemptForm({
             className="box-theme"
           >
             {questions.map((question) => (
-              <div key={question.id} className="p-4 bg-secondary rounded my-4">
+              <div key={question.id} className="p-4 bg-dark-mode border-dark-mode rounded my-4">
                 <div className="flex justify-between items-center mb-4">
                   <p className="text-xl font-semibold">
                     {question.question_text}
@@ -233,7 +233,7 @@ export default function TryStudentFinalExamAttemptForm({
                   {question.course_final_exam_option_answers.map((option) => (
                     <label
                       key={option.id}
-                      className="flex items-center space-x-2 bg-primary p-2 rounded hover:bg-gray-600 transition cursor-pointer"
+                      className="flex items-center space-x-2 bg-white text-black font-semibold p-2 rounded hover:bg-gray-600 transition cursor-pointer"
                     >
                       <input
                         type="checkbox"
@@ -244,7 +244,7 @@ export default function TryStudentFinalExamAttemptForm({
                         onChange={() =>
                           handleOptionChange(question.id, option.id)
                         }
-                        className="form-checkbox text-primary"
+                        className="form-checkbox text-black"
                       />
                       <span>{option.answer_text}</span>
                     </label>

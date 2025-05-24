@@ -1,8 +1,8 @@
 'use client';
 import axios from "axios";
 import { useState, useEffect, useCallback } from "react";
-import { getPlatformUser } from "../models/platform/platform_user/platform_user";
-import { LogoutUserPlatform } from "../models/platform/platform_user/logout";
+import { getPlatformUser } from "@/src/controllers/platform/platform_user/platform_user";
+import { LogoutUserPlatform } from "@/src/controllers/platform/platform_user/logout";
 
 export const useUserInfo = () => {
   const [user, setUser] = useState(null);

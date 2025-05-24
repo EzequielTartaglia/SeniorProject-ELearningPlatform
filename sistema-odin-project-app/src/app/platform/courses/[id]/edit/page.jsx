@@ -3,11 +3,11 @@ import ConditionalSessionRender from "@/src/helpers/ConditionalSessionRender";
 import NotPermissionPage from "@/src/views/Platform/NotPermissionPage/NotPermissionPage";
 
 export default function Editcourse({ params }) {
-    return (
-        <ConditionalSessionRender
-            AuthorizedUserRoles={[3, 4]}
-            ComponentIfUser={<CourseEditDetailsPage courseId={params.id} />}
-            ComponentIfNoUser={<NotPermissionPage/>}
-        />
-    );
+  return (
+    <ConditionalSessionRender
+      AuthorizedUserRoles={[3, 4, 5]}
+      ComponentIfUser={<CourseEditDetailsPage courseId={params.id} />}
+      ComponentIfNoUser={<NotPermissionPage />}
+    />
+  );
 }

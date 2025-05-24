@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
 import {
   getPlatformUsers,
   editPlatformUserStatus,
-} from "@/src/models/platform/platform_user/platform_user";
+} from "@/src/controllers/platform/platform_user/platform_user";
 
 import axios from "axios";
 import { useState } from "react";
@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 
 import Input from "@/components/forms/Input";
 import SubmitLoadingButton from "../SubmitLoadingButton";
+import NotificationComponent from "@/utils/web-push/NotificationComponent";
 
 export default function LoginForm({ onCloseModal }) {
   const [email, setEmail] = useState("");
@@ -18,6 +19,7 @@ export default function LoginForm({ onCloseModal }) {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [showNotification, setShowNotification] = useState(false); 
 
   const router = useRouter();
 
@@ -48,13 +50,17 @@ export default function LoginForm({ onCloseModal }) {
 
       // Verificar si el usuario está baneado o bloqueado
       if (foundUser.is_banned) {
-        setErrorMessage("Acceso restringido de manera permanente,para más información comunicate con soporte.");
+        setErrorMessage(
+          "Acceso restringido de manera permanente, para más información comunicate con soporte."
+        );
         setIsLoading(false);
         return;
       }
 
       if (foundUser.is_blocked) {
-        setErrorMessage("Acceso restringido de manera temporal, para más información comunicate con soporte.");
+        setErrorMessage(
+          "Acceso restringido de manera temporal, para más información comunicate con soporte."
+        );
         setIsLoading(false);
         return;
       }
@@ -63,7 +69,10 @@ export default function LoginForm({ onCloseModal }) {
       await editPlatformUserStatus(foundUser.id, true);
 
       // Realizar el inicio de sesión con axios
-      const loginResponse = await axios.post(`/api/auth/login`, foundUser);
+      await axios.post(`/api/auth/login`, foundUser);
+
+      // Mostrar la notificación al iniciar sesión exitosamente
+      setShowNotification(true);
 
       setTimeout(() => {
         setIsLoading(false);
@@ -108,11 +117,7 @@ export default function LoginForm({ onCloseModal }) {
           <SubmitLoadingButton
             type="submit"
             isLoading={isLoading}
-            submitText={
-              isLoading
-                ? "Iniciando sesión"
-                : "Iniciar sesión"
-            }
+            submitText={isLoading ? "Iniciando sesión" : "Iniciar sesión"}
           >
             Iniciar sesión
           </SubmitLoadingButton>
@@ -137,6 +142,14 @@ export default function LoginForm({ onCloseModal }) {
           </svg>
         </button>
       </div>
+
+      {showNotification && (
+        <NotificationComponent
+          title="Inicio de sesion exitoso"
+          message="Continua gestionando tu educacion y conocimiento en el campus virtual."
+          icon="/logo.png"
+        />
+      )}
     </div>
   );
 }

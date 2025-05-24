@@ -1,9 +1,9 @@
 "use client";
 
-import { editPlatformUser } from "@/src/models/platform/platform_user/platform_user";
-import { getPlatformUserRoles } from "@/src/models/platform/platform_user_role/platform_user_role";
-import { getCountries } from "@/src/models/platform/country/country";
-import { getPlatformUserGenders } from "@/src/models/platform/platform_user_gender/platform_user_gender";
+import { editPlatformUser } from "@/src/controllers/platform/platform_user/platform_user";
+import { getPlatformUserRoles } from "@/src/controllers/platform/platform_user_role/platform_user_role";
+import { getCountries } from "@/src/controllers/platform/country/country";
+import { getPlatformUserGenders } from "@/src/controllers/platform/platform_user_gender/platform_user_gender";
 
 import { useState, useEffect } from "react";
 import { useNotification } from "@/contexts/NotificationContext";
@@ -33,6 +33,8 @@ export default function EditUserForm() {
     password: user.password || "",
     user_role_id: user.user_role_id,
     birthdate: user.birthdate,
+    platform_user_business_id: user.platform_user_business_id,
+    created_by_user_id: user.created_by_user_id,
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -140,7 +142,9 @@ export default function EditUserForm() {
         userData.username,
         user.password,
         userData.user_role_id,
-        userData.birthdate
+        userData.birthdate,
+        userData.platform_user_business_id,
+        userData.created_by_user_id
       );
 
       showNotification("¡Usuario actualizado exitosamente!", "success");

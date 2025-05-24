@@ -3,9 +3,10 @@
 import {
   getCourse,
   getTotalTimeToComplete,
-} from "@/src/models/platform/course/course";
-import { getCourseLevels } from "@/src/models/platform/course_level/course_level";
-import { getCourseModules } from "@/src/models/platform/course_module/courses_module";
+} from "@/src/controllers/platform/course/course";
+import { getCourseLevels } from "@/src/controllers/platform/course_level/course_level";
+import { getCourseModules } from "@/src/controllers/platform/course_module/courses_module";
+import { getPlatformProfessorUser } from "@/src/controllers/platform/platform_user/platform_professor_user";
 
 import formatTimeFromMinutesToHoursAndMinutes from "@/src/helpers/formatTimeFromMinutesToHoursAndMinutes";
 import { useEffect, useState } from "react";
@@ -17,6 +18,7 @@ import CallToActionWhatsAppButton from "@/components/buttons/CallToActionWhatsAp
 
 const CoursePreviewPage = ({ courseId }) => {
   const [courseDetails, setCourseDetails] = useState(null);
+  const [professor, setProfessor] = useState(null);
   const [loading, setLoading] = useState(true);
   const [totalTime, setTotalTime] = useState(0);
 
@@ -28,6 +30,9 @@ const CoursePreviewPage = ({ courseId }) => {
       try {
         const details = await getCourse(courseId);
         setCourseDetails(details);
+
+        const professorDetails = await getPlatformProfessorUser(details.professor_id);
+        setProfessor(professorDetails || null);
 
         const timeToComplete = await getTotalTimeToComplete(courseId);
         setTotalTime(timeToComplete);
@@ -89,6 +94,7 @@ const CoursePreviewPage = ({ courseId }) => {
       </div>
 
       <CourseDetailsCard
+        professor={professor}
         imageUrl={courseDetails.image_preview_link}
         moduleList={courseModules}
         description={courseDetails.description}

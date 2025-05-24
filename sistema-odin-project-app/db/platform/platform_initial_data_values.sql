@@ -3,8 +3,9 @@ INSERT INTO public.platform_user_roles (id, name, created_at)
 VALUES 
   (1, 'Estudiante', NOW()),
   (2, 'Profesor', NOW()),
-  (3, 'Administrador', NOW()),
-  (4, 'root', NOW());
+  (3, 'Administrador (empresa)', NOW()),
+  (4, 'root', NOW()),
+  (5, 'Administrador (empresas)', NOW());
 
 -- Insert user into platform_states
 INSERT INTO public.platform_states (id, name, created_at) 
@@ -14,22 +15,27 @@ VALUES
 (3, 'Pagado', NOW()),
 (4, 'Finalizado', NOW());
 
--- Insert user into platform_states
-INSERT INTO public.currency_types (id, abbreviation, name, created_at) 
+-- Insert user into platform_user_business
+INSERT INTO public.platform_user_business (
+  id,name) VALUES 
+  (1,'Sistema Odin');
+
+-- Insert data into currency_types
+INSERT INTO public.currency_types (id, abbreviation, name) 
 VALUES 
-(1, 'No aplica', 'No aplica', NOW()),              -- Sin especificar
-(2, 'ARS', 'Pesos Argentinos', NOW()),             -- Argentina
-(3, 'BRL', 'Reales Brasileños', NOW()),            -- Brasil
-(4, 'CRC', 'Colones Costarricenses', NOW()),       -- Costa Rica
-(5, 'COP', 'Pesos Colombianos', NOW()),            -- Colombia
-(6, 'EUR', 'Euro', NOW()),                         -- Euro
-(7, 'GBP', 'Libra Esterlina', NOW()),              -- Libra Esterlina
-(8, 'HNL', 'Lempiras Hondureños', NOW()),          -- Honduras
-(9, 'MXN', 'Pesos Mexicanos', NOW()),              -- México
-(10, 'PEN', 'Soles Peruanos', NOW()),              -- Perú
-(11, 'CLP', 'Pesos Chilenos', NOW()),              -- Chile
-(12, 'USD', 'Dólar Estadounidense', NOW()),        -- Estados Unidos
-(13, 'UYU', 'Pesos Uruguayos', NOW());             -- Uruguay
+(1, 'No aplica', 'No aplica'),              -- Sin especificar
+(2, 'ARS', 'Pesos Argentinos'),             -- Argentina
+(3, 'BRL', 'Reales Brasileños'),            -- Brasil
+(4, 'CRC', 'Colones Costarricenses'),       -- Costa Rica
+(5, 'COP', 'Pesos Colombianos'),            -- Colombia
+(6, 'EUR', 'Euro'),                         -- Euro
+(7, 'GBP', 'Libra Esterlina'),              -- Libra Esterlina
+(8, 'HNL', 'Lempiras Hondureños'),          -- Honduras
+(9, 'MXN', 'Pesos Mexicanos'),              -- México
+(10, 'PEN', 'Soles Peruanos'),              -- Perú
+(11, 'CLP', 'Pesos Chilenos'),              -- Chile
+(12, 'USD', 'Dólar Estadounidense'),        -- Estados Unidos
+(13, 'UYU', 'Pesos Uruguayos');             -- Uruguay
 
 -- Insert data into countries table
 INSERT INTO public.countries (id, abbreviation, name, created_at) VALUES

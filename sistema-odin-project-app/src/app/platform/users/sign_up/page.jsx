@@ -5,7 +5,7 @@ import NotPermissionPage from "@/src/views/Platform/NotPermissionPage/NotPermiss
 export default function SignUp() {
   return (
     <ConditionalSessionRender
-      AuthorizedUserRoles={[3, 4]}
+      AuthorizedUserRoles={[3, 4, 5]}
       ComponentIfUser={<SignUpForm />}
       ComponentIfNoUser={<NotPermissionPage />}
     />

@@ -5,7 +5,7 @@ import UsersPage from "@/src/views/Platform/Users/UsersPage/UsersPage";
 export default function Users() {
   return (
     <ConditionalSessionRender
-      AuthorizedUserRoles={[3, 4]}
+      AuthorizedUserRoles={[3, 4, 5]}
       ComponentIfUser={<UsersPage />}
       ComponentIfNoUser={<NotPermissionPage />}
     />

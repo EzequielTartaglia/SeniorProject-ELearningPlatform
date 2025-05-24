@@ -1,7 +1,8 @@
 "use client";
 
-import LoadingSpinner from "@/components/LoadingSpinner";
 import React, { useState, useEffect } from "react";
+import { FaExclamationTriangle } from "react-icons/fa";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 export default function NotPermissionPage() {
   const [showSpinner, setShowSpinner] = useState(true);
@@ -17,10 +18,27 @@ export default function NotPermissionPage() {
   return (
     <>
       {showSpinner ? (
-        <LoadingSpinner />
+        <div className="flex justify-center items-center h-screen ">
+          <LoadingSpinner />
+        </div>
       ) : (
-        <div className="flex flex-col justify-center items-center h-screen">
-          <div className="text-primary text-2xl">Acceso denegado</div>
+        <div className="flex flex-col justify-center items-center h-screen ">
+          <div className="flex flex-col items-center p-6 card-theme border-secondary-light rounded-md shadow-lg">
+            <FaExclamationTriangle className="text-red-500 text-6xl mb-4" />
+            <h1 className="text-red-600 text-3xl font-semibold mb-2">
+              Acceso denegado
+            </h1>
+            <p className="text-white text-center">
+            Lo sentimos, no tienes permiso para acceder a esta página. 
+              Si crees que esto es un error, contacta al administrador.
+            </p>
+            <button
+              className="mt-4 px-4 py-2 bg-primary text-title-active-static rounded-md shadow-md transition duration-300 bg-primary border-secondary-light text-title-active-static font-semibold bg-dark-mode "
+              onClick={() => (window.location.href = "/platform")}
+            >
+              Volver al inicio
+            </button>
+          </div>
         </div>
       )}
     </>

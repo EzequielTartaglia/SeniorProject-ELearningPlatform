@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { cookies } from "next/headers";
-import { getPlatformUser } from '@/src/models/platform/platform_user/platform_user';
+import { getPlatformUser } from '@/src/controllers/platform/platform_user/platform_user';
 
 export const getUserFromToken = async () => {
   try {

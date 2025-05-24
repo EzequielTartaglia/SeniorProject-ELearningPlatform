@@ -19,7 +19,7 @@ export default function AsidePlatformMenu({ menuItems, isPlatformRoute }) {
   const [currentSubMenuItems, setCurrentSubMenuItems] = useState([]);
   const [parentTitle, setParentTitle] = useState("");
   const [tooltip, setTooltip] = useState("");
-  const [isAsideOpen, setIsAsideOpen] = useState(true); // Nuevo estado para manejar la visibilidad del aside
+  const [isAsideOpen, setIsAsideOpen] = useState(true);
   const { user, userLogout } = useUserInfoContext();
 
   const handleSubMenuClick = (id, subMenuItems, title) => {
@@ -61,7 +61,7 @@ export default function AsidePlatformMenu({ menuItems, isPlatformRoute }) {
   };
 
   const toggleAside = () => {
-    setIsAsideOpen(!isAsideOpen); // Alternar la visibilidad del aside
+    setIsAsideOpen(!isAsideOpen);
   };
 
   return (
@@ -73,7 +73,7 @@ export default function AsidePlatformMenu({ menuItems, isPlatformRoute }) {
             isAsideOpen
               ? "ml-[60px] sm:ml-[60px] md:ml-[70px] left-4"
               : "left-2"
-          } top-2  z-40 text-primary text-2xl p-3 nav-bg-primary-light rounded-full shadow-md`}
+          } top-2  z-40 text-primary text-2xl p-3 bg-dark-mode rounded-full shadow-md text-title border-dark-mode`}
         >
           {isAsideOpen ? <FiChevronLeft size={24} /> : <FiMenu size={24} />}
         </button>
@@ -81,7 +81,7 @@ export default function AsidePlatformMenu({ menuItems, isPlatformRoute }) {
 
       {/* Primer Aside */}
       <aside
-        className={`fixed top-0 left-0 h-full nav-bg-primary-light transition-transform transform w-16 sm:w-20 md:w-20 lg:w-20 xl:w-20 flex flex-col items-center pt-0 z-30 ${
+        className={`fixed top-0 left-0 h-full bg-dark-mode transition-transform transform w-16 sm:w-20 md:w-20 lg:w-20 xl:w-20 flex flex-col items-center pt-0 z-30 ${
           isAsideOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -127,7 +127,7 @@ export default function AsidePlatformMenu({ menuItems, isPlatformRoute }) {
         {user && (
           <div className="mt-auto mb-4 flex flex-col items-center group relative">
             <Button
-              customClasses="px-2 py-2 bg-primary text-title-active-static rounded-md shadow-md hover:bg-secondary transition duration-300 bg-primary border-secondary-light text-title-active-static font-semibold gradient-button"
+              customClasses="px-2 py-2 bg-primary text-title-active-static rounded-md shadow-md hover:bg-secondary transition duration-300 bg-primary border-secondary-light text-title-active-static font-semibold bg-dark-mode"
               customFunction={() =>
                 openModal(
                   <ConfirmModal
@@ -151,7 +151,7 @@ export default function AsidePlatformMenu({ menuItems, isPlatformRoute }) {
       {/* Overlay */}
       {isSecondAsideVisible && (
         <div
-          className="fixed top-0 left-0 h-full bg-black transition-opacity duration-300 z-10"
+          className="fixed top-0 left-0 h-full bg-black transition-opacity duration-300 z-10 "
           style={{
             opacity: isSecondAsideVisible ? "0.5" : "0",
             pointerEvents: isSecondAsideVisible ? "auto" : "none",
@@ -166,7 +166,7 @@ export default function AsidePlatformMenu({ menuItems, isPlatformRoute }) {
           isAsideOpen
             ? "left-16 sm:left-20 md:left-20 lg:left-20 xl:left-20"
             : ""
-        }  h-full nav-bg-primary-light z-20 transition-transform duration-300 ${
+        }  h-full bg-dark-mode z-20 transition-transform duration-300 ${
           isSecondAsideVisible
             ? "translate-x-0 border-r-2 border-r-primary"
             : "-translate-x-full"
@@ -174,7 +174,7 @@ export default function AsidePlatformMenu({ menuItems, isPlatformRoute }) {
       >
         <button
           onClick={toggleSecondAside}
-          className="text-primary text-2xl p-4 absolute top-4 right-4"
+          className="text-title text-2xl p-4 absolute top-4 right-4"
         >
           <FiX />
         </button>
@@ -190,6 +190,7 @@ export default function AsidePlatformMenu({ menuItems, isPlatformRoute }) {
               {currentSubMenuItems.map((subItem) => (
                 <li key={subItem.route} className="mb-4">
                   <Button
+                    isAnimated={false}
                     route={subItem.route}
                     text={subItem.text}
                     customClasses="block text-primary shadow-none py-2 px-4 text-title hover:bg-gold hover:text-primary"

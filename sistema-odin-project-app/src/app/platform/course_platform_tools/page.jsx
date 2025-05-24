@@ -5,8 +5,8 @@ import NotPermissionPage from "@/src/views/Platform/NotPermissionPage/NotPermiss
 export default function CoursePlatformTools() {
   return (
     <ConditionalSessionRender
-      AuthorizedUserRoles={[3, 4]}
-      ComponentIfUser={
+    AuthorizedUserRoles={[3, 4, 5]}
+    ComponentIfUser={
         <CoursesPlatformToolsPage />
       }
       ComponentIfNoUser={<NotPermissionPage />}

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
@@ -6,16 +6,19 @@ import Head from "next/head";
 
 const Metadata = () => {
   const pathname = usePathname();
-  const isPlatformRoute = pathname && pathname.includes('/platform');
-  const brandName = process.env.NEXT_PUBLIC_BRAND_NAME; 
+  const isPlatformRoute = pathname && pathname.includes("/platform");
+  const isControlCenterRoute = pathname && pathname.includes("/control_center");
+  const brandName = process.env.NEXT_PUBLIC_BRAND_NAME;
 
   useEffect(() => {
     if (isPlatformRoute) {
-      document.title = `${brandName} | Plataforma`;
+      document.title = `${brandName} | Campus Virtual`;
+    } else if (isControlCenterRoute) {
+      document.title = `${brandName} | Centro de Control`;
     } else {
       document.title = brandName;
     }
-  }, [isPlatformRoute, brandName]);
+  }, [isPlatformRoute, isControlCenterRoute, brandName]);
 
   return (
     <Head>

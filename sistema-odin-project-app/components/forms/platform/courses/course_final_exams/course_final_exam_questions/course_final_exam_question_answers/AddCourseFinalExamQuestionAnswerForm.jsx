@@ -1,7 +1,7 @@
 'use client';
 
-import { getCourseFinalExamQuestion } from "@/src/models/platform/course_final_exam_question/course_final_exam_question";
-import { addCourseFinalExamOptionsAnswer } from "@/src/models/platform/course_final_exam_option_answer/course_final_exam_option_answer";
+import { getCourseFinalExamQuestion } from "@/src/controllers/platform/course_final_exam_question/course_final_exam_question";
+import { addCourseFinalExamOptionsAnswer } from "@/src/controllers/platform/course_final_exam_option_answer/course_final_exam_option_answer";
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";

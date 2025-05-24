@@ -3,10 +3,10 @@
 import {
   getCourseModuleClassSingle,
   editCourseModuleClass,
-} from "@/src/models/platform/course_module_class/course_module_class";
-import { getCourseFormats } from "@/src/models/platform/course_format/course_format";
-import { getCoursePlatformTools } from "@/src/models/platform/course_platform_tool/course_platform_tool";
-import { getCourseModule } from "@/src/models/platform/course_module/courses_module";
+} from "@/src/controllers/platform/course_module_class/course_module_class";
+import { getCourseFormats } from "@/src/controllers/platform/course_format/course_format";
+import { getCoursePlatformTools } from "@/src/controllers/platform/course_platform_tool/course_platform_tool";
+import { getCourseModule } from "@/src/controllers/platform/course_module/courses_module";
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";

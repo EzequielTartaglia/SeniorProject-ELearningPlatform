@@ -3,8 +3,8 @@
 import {
   getCourseModule,
   editCourseModule,
-} from "@/src/models/platform/course_module/courses_module";
-import { getCourse } from "@/src/models/platform/course/course";
+} from "@/src/controllers/platform/course_module/courses_module";
+import { getCourse } from "@/src/controllers/platform/course/course";
 
 import { useNotification } from "@/contexts/NotificationContext";
 import { useState, useEffect } from "react";

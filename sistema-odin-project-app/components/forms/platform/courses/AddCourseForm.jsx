@@ -1,25 +1,32 @@
 "use client";
 
-import { addCourse } from "@/src/models/platform/course/course";
-import { getCurrencyTypes } from "@/src/models/platform/currency_type/currency_type";
-import { getCourseLevels } from "@/src/models/platform/course_level/course_level";
-import { getPaymentMethods } from "@/src/models/platform/payment_method/payment_method";
+import { addCourse } from "@/src/controllers/platform/course/course";
+import { getCurrencyTypes } from "@/src/controllers/platform/currency_type/currency_type";
+import { getCourseLevels } from "@/src/controllers/platform/course_level/course_level";
+import { getPaymentMethods } from "@/src/controllers/platform/payment_method/payment_method";
+import {
+  getPlatformProfessorUsers,
+  getPlatformProfessorUsersFromBusiness,
+} from "@/src/controllers/platform/platform_user/platform_professor_user";
 
 import { useNotification } from "@/contexts/NotificationContext";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useUserInfoContext } from "@/contexts/UserInfoContext";
 
 import Input from "@/components/forms/Input";
 import PageHeader from "@/components/page_formats/PageHeader";
 import CheckboxInput from "../../CheckboxInput";
-import SubmitLoadingButton from "../../SubmitLoadingButton";
-import TextArea from "../../TextArea";
+import SubmitLoadingButton from "@/components/forms/SubmitLoadingButton";
+import TextArea from "@/components/forms/TextArea";
 import SelectInput from "../../SelectInput";
 import Button from "@/components/Button";
 import { FiTrash2 } from "react-icons/fi";
 import FileInput from "../../FileInput";
 
 export default function AddCourseForm() {
+  const { user } = useUserInfoContext();
+
   const [course, setCourse] = useState({
     name: "",
     has_final_exam: true,
@@ -32,6 +39,7 @@ export default function AddCourseForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [formErrors, setFormErrors] = useState({});
+  const [professorsTable, setProfessorsTable] = useState([]);
 
   const router = useRouter();
   const { showNotification } = useNotification();
@@ -56,12 +64,35 @@ export default function AddCourseForm() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    async function filterData() {
+      try {
+        const professors = await getPlatformProfessorUsers();
+        const filteredProfessors =
+          user && user.user_role_id === 3
+            ? await getPlatformProfessorUsersFromBusiness(
+                parseInt(user.platform_user_business_id)
+              )
+            : professors;
+        setProfessorsTable(filteredProfessors);
+      } catch (error) {
+        console.error(
+          "Error al obtener datos de los profesores:",
+          error.message
+        );
+      }
+    }
+    if (user) {
+      filterData();
+    }
+  }, [user]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     let errors = {};
 
-    if (!course.name) {
+    if (!course.name || course.name.length === 0) {
       errors.name = "Campo obligatorio";
     }
 
@@ -99,7 +130,10 @@ export default function AddCourseForm() {
         JSON.stringify(course.payment_methods),
         course.course_level_id,
         course.description,
-        course.image_preview_link
+        course.image_preview_link,
+        user.platform_user_business_id,
+        user.id,
+        course.professor_id
       );
 
       showNotification("¡Curso agregado exitosamente!", "success");
@@ -116,14 +150,11 @@ export default function AddCourseForm() {
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
-
-    setCourse((prevCourse) => ({
-      ...prevCourse,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-
-    // Reset errors when inputs change
-    setFormErrors({});
+    const newValue = type === "checkbox" ? checked : value;
+    setCourse({
+      ...course,
+      [name]: newValue,
+    });
   };
 
   const handlePaymentMethodChange = (index, field, value) => {
@@ -201,6 +232,20 @@ export default function AddCourseForm() {
           note="El texto ingresado aparecerá públicamente en el preview y en la información del curso."
           hasHightlightTexts={true}
         />
+
+        <div className="mt-1">
+          <SelectInput
+            label="Profesor"
+            name="professor_id"
+            value={course.professor_id}
+            onChange={handleInputChange}
+            isSubmitted={isSubmitted}
+            table={professorsTable}
+            columnName="first_name"
+            columnName2="last_name"
+            idColumn="id"
+          />
+        </div>
 
         <div className="mt-1 mb-[-10px]">
           <SelectInput

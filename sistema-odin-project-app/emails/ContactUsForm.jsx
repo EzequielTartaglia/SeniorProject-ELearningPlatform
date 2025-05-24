@@ -76,7 +76,7 @@ export default function ContactUsForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="card-theme max-w-md mx-auto p-4">
+    <form onSubmit={handleSubmit} className="box-theme-home max-w-md mx-auto p-4 ">
       <Input
         label="Nombre"
         name="firstName"
@@ -85,6 +85,7 @@ export default function ContactUsForm() {
         isSubmitted={isSubmitted}
         errorMessage="El nombre es requerido."
         required
+        textWhite={true}
       />
 
       <Input
@@ -95,6 +96,7 @@ export default function ContactUsForm() {
         isSubmitted={isSubmitted}
         errorMessage="El apellido es requerido."
         required
+        textWhite={true}
       />
 
       <Input
@@ -106,6 +108,7 @@ export default function ContactUsForm() {
         isSubmitted={isSubmitted}
         errorMessage="El teléfono es requerido."
         required
+        textWhite={true}
       />
 
       <Input
@@ -117,6 +120,7 @@ export default function ContactUsForm() {
         isSubmitted={isSubmitted}
         errorMessage="El correo electrónico es requerido."
         required
+        textWhite={true}
       />
 
       <TextArea
@@ -128,6 +132,7 @@ export default function ContactUsForm() {
         errorMessage="El mensaje es requerido."
         required
         rows={4}
+        textWhite={true}
         note="Por favor, proporciona detalles sobre tu consulta o solicitud."
       />
 

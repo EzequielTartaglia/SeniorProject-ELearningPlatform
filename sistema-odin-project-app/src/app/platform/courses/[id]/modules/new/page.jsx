@@ -5,10 +5,8 @@ import NotPermissionPage from "@/src/views/Platform/NotPermissionPage/NotPermiss
 export default function AddCourseModules({ params }) {
   return (
     <ConditionalSessionRender
-      AuthorizedUserRoles={[3, 4]}
-      ComponentIfUser={
-        <NewCourseModulePage courseId={params.id} />
-      }
+      AuthorizedUserRoles={[3, 4, 5]}
+      ComponentIfUser={<NewCourseModulePage courseId={params.id} />}
       ComponentIfNoUser={<NotPermissionPage />}
     />
   );

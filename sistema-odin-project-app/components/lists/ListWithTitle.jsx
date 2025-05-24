@@ -55,7 +55,7 @@ export default function ListWithTitle({
   return (
     <div className="box-theme font-semibold">
       <div className="flex justify-between items-center mb-4">
-        <h3 className="text-lg font-semibold text-title-active-static">{title}</h3>
+        <h3 className="text-2xl font-semibold text-title-active-static">{title}</h3>
 
         {hasAdd && buttonAddRoute && (
           <Link href={buttonAddRoute}>
@@ -105,7 +105,7 @@ export default function ListWithTitle({
               buttonEditRoute3={buttonEditRoute3}
             />
           ) : (
-            <ul className="shadow-md rounded-lg p-1 bg-primary mt-4 relative w-full bg-secondary">
+            <ul className="shadow-md rounded-lg p-1 bg-primary mt-4 relative w-full bg-dark-mode">
               <li className="text-center py-2 text-center text-gray-400">
                 <p >No hay nada para mostrar.</p>
               </li>

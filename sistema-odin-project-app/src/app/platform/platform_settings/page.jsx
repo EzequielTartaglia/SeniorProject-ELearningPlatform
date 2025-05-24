@@ -5,8 +5,8 @@ import PlatformSettingsPage from "@/src/views/Platform/PlatformSettings/Platform
 export default function PlatformSettings() {
   return (
     <ConditionalSessionRender
-      AuthorizedUserRoles={[3, 4]}
-      ComponentIfUser={<PlatformSettingsPage />}
+    AuthorizedUserRoles={[4, 5]}
+    ComponentIfUser={<PlatformSettingsPage />}
       ComponentIfNoUser={<NotPermissionPage />}
     />
   );

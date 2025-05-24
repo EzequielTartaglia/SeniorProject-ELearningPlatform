@@ -5,9 +5,13 @@ import NotPermissionPage from "@/src/views/Platform/NotPermissionPage/NotPermiss
 export default function EditCourseModuleClass({ params }) {
   return (
     <ConditionalSessionRender
-      AuthorizedUserRoles={[3, 4]}
+      AuthorizedUserRoles={[3, 4, 5]}
       ComponentIfUser={
-        <EditModuleCourseClassPage courseId={params.id} moduleId={params.moduleId} classId={params.classId} />
+        <EditModuleCourseClassPage
+          courseId={params.id}
+          moduleId={params.moduleId}
+          classId={params.classId}
+        />
       }
       ComponentIfNoUser={<NotPermissionPage />}
     />

@@ -2,13 +2,11 @@ import CourseFinalExamManagePage from "@/src/views/Platform/CoursesPage/Course[i
 import ConditionalSessionRender from "@/src/helpers/ConditionalSessionRender";
 import NotPermissionPage from "@/src/views/Platform/NotPermissionPage/NotPermissionPage";
 
-export default function CourseFinalExamManage({params}) {
+export default function CourseFinalExamManage({ params }) {
   return (
     <ConditionalSessionRender
-      AuthorizedUserRoles={[3, 4]}
-      ComponentIfUser={
-        <CourseFinalExamManagePage courseId={params.id} />
-      }
+      AuthorizedUserRoles={[3, 4, 5]}
+      ComponentIfUser={<CourseFinalExamManagePage courseId={params.id} />}
       ComponentIfNoUser={<NotPermissionPage />}
     />
   );

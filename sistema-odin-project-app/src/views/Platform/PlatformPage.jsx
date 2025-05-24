@@ -1,8 +1,8 @@
 "use client";
 
-import { getCourses } from "@/src/models/platform/course/course";
-import { getCurrencyTypes } from "@/src/models/platform/currency_type/currency_type";
-import { getCourseLevels } from "@/src/models/platform/course_level/course_level";
+import { getCourses } from "@/src/controllers/platform/course/course";
+import { getCurrencyTypes } from "@/src/controllers/platform/currency_type/currency_type";
+import { getCourseLevels } from "@/src/controllers/platform/course_level/course_level";
 
 import { useUserInfoContext } from "@/contexts/UserInfoContext";
 import { useState, useEffect } from "react";
@@ -11,7 +11,6 @@ import PageHeader from "@/components/page_formats/PageHeader";
 import Button from "@/components/Button";
 import Image from "next/image";
 import Subtitle from "@/components/Subtitle";
-import Title from "@/components/Title";
 
 export default function PlatformPage() {
   const { user } = useUserInfoContext();
@@ -83,7 +82,7 @@ export default function PlatformPage() {
 
   return (
     <>
-      <PageHeader title="Plataforma" />
+      <PageHeader title="Campus virtual" />
 
       <Subtitle
         text="Últimos lanzamientos"
@@ -113,7 +112,7 @@ export default function PlatformPage() {
             >
               <Button
                 route={"/platform/courses"}
-                customClasses="px-4 py-2 bg-primary text-title-active-static rounded-md shadow-md hover:bg-secondary transition duration-300 border-secondary-light text-title-active-static font-semibold gradient-button mb-4"
+                customClasses="px-4 py-2 bg-primary text-title-active-static rounded-md shadow-md transition duration-300 border-secondary-light text-title-active-static font-semibold bg-dark-mode mb-4" 
                 text={"Ver todos los cursos"}
                 title={"Ver todos los cursos"}
               />
@@ -128,7 +127,7 @@ export default function PlatformPage() {
               return (
                 <div
                   key={course.id}
-                  className="border-card-detail rounded-lg shadow-md p-6 relative hover:shadow-lg transition-shadow duration-300 ease-in-out bg-primary border-secondary-light gradient-button"
+                  className="card-theme rounded-lg shadow-md p-6 relative hover:shadow-lg transition-shadow duration-300 ease-in-out bg-primary bg-dark-mode"
                 >
                   {price !== 0 && (
                     <div className="rounded-gradient-box font-semibold">
@@ -172,7 +171,7 @@ export default function PlatformPage() {
                     )}
                   </div>
                   <Button
-                    customClasses="mt-4 px-4 py-2 text-title-active-static bg-primary border-secondary-light rounded-md shadow-md hover:bg-secondary transition duration-300 font-semibold gradient-button"
+                    customClasses="mt-4 px-4 py-2 text-title-active-static border-secondary-light rounded-md shadow-md  transition duration-300 font-semibold bg-dark-mode"
                     route={`/platform/courses/${course.id}/preview`}
                     text={"Más información"}
                     title={"Más información"}
@@ -186,13 +185,13 @@ export default function PlatformPage() {
               {user ? (
                 <Button
                   route={"/platform/courses"}
-                  customClasses="px-4 py-2 bg-primary text-title-active-static rounded-md shadow-md hover:bg-secondary transition duration-300 border-secondary-light text-title-active-static font-semibold gradient-button mb-4"
+                  customClasses="px-4 py-2 text-title-active-static rounded-md shadow-md transition duration-300 border-secondary-light text-title-active-static font-semibold bg-dark-mode mb-4"
                   text={"Ver más cursos"}
                   title={"Ver más cursos"}
                 />
               ) : (
                 <Button
-                  customClasses="px-4 py-2 button-disabled text-primary rounded-md shadow-md hover:bg-secondary transition duration-300 cursor-not-allowed opacity-50"
+                  customClasses="px-4 py-2 button-disabled text-primary rounded-md shadow-md transition duration-300 cursor-not-allowed opacity-50"
                   text={"Regístrate para conocer más sobre nuestros cursos"}
                   title={"Regístrate para conocer más sobre nuestros cursos"}
                   disabled

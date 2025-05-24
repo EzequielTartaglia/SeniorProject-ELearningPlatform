@@ -180,8 +180,8 @@ export async function generateCertificateOfCompletion(
 
     // Draw the signature image
     page.drawImage(signatureImage, {
-      x: ceoNameX - 0,
-      y: signatureY,
+      x: ceoNameX - 20,
+      y: signatureY - 0,
       width: signatureDimensions.width,
       height: signatureDimensions.height,
     });

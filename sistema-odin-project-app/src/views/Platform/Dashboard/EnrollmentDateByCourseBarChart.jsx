@@ -12,7 +12,7 @@ import {
   LinearScale,
 } from "chart.js";
 import SearchInput from "@/components/SearchInput";
-import { getEnrollmentCountsByCourse } from "@/src/models/platform/student_course_enrollment/student_course_enrollment_insights";
+import { getEnrollmentCountsByCourse } from "@/src/controllers/platform/student_course_enrollment/student_course_enrollment_insights";
 
 ChartJS.register(
   Title,

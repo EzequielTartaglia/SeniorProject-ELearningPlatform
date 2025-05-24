@@ -1,6 +1,6 @@
 'use client';
 
-import { getCourseModuleClassPlatformTool } from "@/src/models/platform/course_platform_tool/course_platform_tool";
+import { getCourseModuleClassPlatformTool } from "@/src/controllers/platform/course_platform_tool/course_platform_tool";
 import { useEffect, useState } from "react";
 
 export default function CourseModuleClassPlatformTool({ courseModuleClassPlatformToolId, className }) {

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { FiDollarSign, FiClock } from "react-icons/fi";
-import { getCurrencyType } from "@/src/models/platform/currency_type/currency_type";
-import { getPaymentMethod } from "@/src/models/platform/payment_method/payment_method";
+import { getCurrencyType } from "@/src/controllers/platform/currency_type/currency_type";
+import { getPaymentMethod } from "@/src/controllers/platform/payment_method/payment_method";
 import Button from "@/components/Button";
 
 export default function ConfirmEnrollmentModal({
@@ -79,7 +78,7 @@ export default function ConfirmEnrollmentModal({
                   className={`cursor-pointer pl-3 mt-4 ${
                     selectedPaymentMethod === method
                       ? "rounded-lg px-4 py-2 shadow-md transition duration-300 gradient-button-success border-primary-light"
-                      : "rounded-lg border-secondary-light px-4 py-2 shadow-md hover:bg-secondary transition duration-300 bg-primary border-secondary-light gradient-button"
+                      : "rounded-lg border-secondary-light px-4 py-2 shadow-md hover:bg-secondary transition duration-300 bg-primary border-secondary-light bg-dark-mode"
                   }`}
                   onClick={() => handlePaymentMethodSelection(method)}
                 >
@@ -127,7 +126,7 @@ export default function ConfirmEnrollmentModal({
         <div className="flex justify-center gap-4 mt-4">
           <Button
             customFunction={onClose}
-            customClasses="px-4 py-2 bg-primary text-title-active-static rounded-md shadow-md hover:bg-secondary transition duration-300 bg-primary border-secondary-light text-title-active-static font-semibold gradient-button"
+            customClasses="px-4 py-2 bg-primary text-title-active-static rounded-md shadow-md hover:bg-secondary transition duration-300 bg-primary border-secondary-light text-title-active-static font-semibold bg-dark-mode"
             text={"Cancelar"}
           />
           {selectedPaymentMethod ? (

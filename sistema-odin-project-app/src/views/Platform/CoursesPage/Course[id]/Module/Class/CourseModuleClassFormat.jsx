@@ -1,6 +1,6 @@
 'use client'
 
-import { getCourseModuleClassFormat } from "@/src/models/platform/course_module_class/course_module_class";
+import { getCourseModuleClassFormat } from "@/src/controllers/platform/course_module_class/course_module_class";
 import { useEffect, useState } from "react";
 
 export default function CourseModuleClassFormat({ courseModuleClassFormatId, className }) {

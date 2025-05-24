@@ -6,9 +6,11 @@ import Metadata from "@/components/page_formats/Metadata";
 import PageBody from "@/components/page_formats/PageBody";
 import { AsideNavBarProvider } from "@/contexts/AsideContext";
 import { UserInfoProvider } from "@/contexts/UserInfoContext";
+import { UserInfoControlCenterProvider } from "@/contexts/UserInfoControlCenterContext";
 import { NotificationProvider } from "@/contexts/NotificationContext";
 import { Suspense } from "react";
 import Loading from "./loading";
+import PushNotificationManager from "@/utils/web-push/PushNotificationManager";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,16 +26,20 @@ export default function RootLayout({ children }) {
         <body className="min-h-screen body-bg">
           <NotificationProvider>
             <UserInfoProvider>
+            <UserInfoControlCenterProvider>
+            <PushNotificationManager /> 
               <AsideNavBarProvider>
                 <NavBarWrapper />
                 <main
-                  className={`${inter.className} block sm:block md:flex justify-center mx-auto mb-[70px]`}
+                  className={`${inter.className}`}
                   style={{ minHeight: "calc(100vh - 100px)" }}
                 >
                   <PageBody>{children}</PageBody>
                 </main>
                 <FooterWrapper />
               </AsideNavBarProvider>
+              
+              </UserInfoControlCenterProvider>
             </UserInfoProvider>
           </NotificationProvider>
         </body>

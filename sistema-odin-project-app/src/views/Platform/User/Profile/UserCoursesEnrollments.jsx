@@ -1,15 +1,15 @@
 "use client";
 
-import { getStudentCourseEnrollmentsSingleUser } from "@/src/models/platform/student_course_enrollment/student_course_enrollment";
-import { getCourse } from "@/src/models/platform/course/course";
+import { getStudentCourseEnrollmentsPaidSingleUser } from "@/src/controllers/platform/student_course_enrollment/student_course_enrollment";
+import { getCourse } from "@/src/controllers/platform/course/course";
 
 import { useEffect, useState } from "react";
 import { useUserInfoContext } from "@/contexts/UserInfoContext";
-import ListWithTitle from "@/components/lists/ListWithTitle";
 import { FaChalkboardTeacher } from "react-icons/fa";
 import { FiFileText } from "react-icons/fi";
+import CoursesListWithTitleProfile from "@/components/lists/CoursesListWithTitleProfile";
 
-export default function UserCoursesEnrollments() {
+export default function UserCoursesEnrollments({ coursesProgresses, coursesProfessors }) {
   const { user } = useUserInfoContext();
   const [enrollments, setEnrollments] = useState([]);
 
@@ -17,17 +17,29 @@ export default function UserCoursesEnrollments() {
     async function fetchEnrollments() {
       if (user && user.id) {
         try {
-          const userEnrollments = await getStudentCourseEnrollmentsSingleUser(
-            parseInt(user.id, 10)
+          const userEnrollments = await getStudentCourseEnrollmentsPaidSingleUser(
+            parseInt(user.id)
           );
 
           // Fetch course details for each enrollment
           const enrollmentsWithCourseNames = await Promise.all(
             userEnrollments.map(async (enrollment) => {
               const course = await getCourse(enrollment.course_id);
+
+              const professor = coursesProfessors.find(
+                (professorData) => professorData.course_id === course.id
+              )?.professor;
+
+              // Find the progress for the current course
+              const progress = coursesProgresses.find(
+                (progress) => progress.course_id === enrollment.course_id
+              );
+
               return {
                 ...enrollment,
                 course_name: course.name,
+                progress: progress ? progress.userProgress : 0,
+                professor,
               };
             })
           );
@@ -43,18 +55,31 @@ export default function UserCoursesEnrollments() {
     }
 
     fetchEnrollments();
-  }, [user]);
+  }, [user, coursesProgresses, coursesProfessors]);
 
   const getButtonShowRoute = (id) => `/platform/courses/${id}`;
 
   return (
     <>
-      <ListWithTitle
+      <CoursesListWithTitleProfile
         title="Cursos Inscriptos"
-        items={enrollments}
+        items={enrollments.map((course) => {
+          const professor = coursesProfessors.find(
+            (professorData) => professorData.course_id === course.id
+          )?.professor;
+          return {
+            ...course,
+            progress: coursesProgresses.find(
+              (progress) =>
+                progress.course_id === course.id &&
+                progress.userProgress > 0
+            )?.userProgress,
+            professor,
+          };
+        })}
         hasShow={(id) => true}
-        hasEdit={false}
-        hasDelete={false}
+        hasEdit={(id) => false}
+        hasDelete={(id) => false}
         buttonShowRoute={(id) => getButtonShowRoute(id)}
         columnName="course_name"
         hasShowIcon={

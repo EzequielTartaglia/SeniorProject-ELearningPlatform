@@ -5,10 +5,13 @@ import NotPermissionPage from "@/src/views/Platform/NotPermissionPage/NotPermiss
 export default function EditCourseFinalExamQuestionAnswer({ params }) {
   return (
     <ConditionalSessionRender
-      AuthorizedUserRoles={[3, 4]}
+      AuthorizedUserRoles={[3, 4, 5]}
       ComponentIfUser={
-        <EditCourseFinalExamQuestionAnswerPage courseId={params.id}
-    questionId={params.questionId} answerId={params.answerId}/>
+        <EditCourseFinalExamQuestionAnswerPage
+          courseId={params.id}
+          questionId={params.questionId}
+          answerId={params.answerId}
+        />
       }
       ComponentIfNoUser={<NotPermissionPage />}
     />

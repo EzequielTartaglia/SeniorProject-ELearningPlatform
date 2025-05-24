@@ -1,9 +1,9 @@
 "use client";
 
-import { getCourse } from "@/src/models/platform/course/course";
-import { checkStudentCourseEnrollment } from "@/src/models/platform/student_course_enrollment/student_course_enrollment";
-import { getFinalExamQuestionsAndOptions } from "@/src/models/platform/course_final_exam_option_answer/course_final_exam_option_answer";
-import { getStudentCourseEnrollmentFinalExamAttemptTriesFromEnrollment } from "@/src/models/platform/student_course_enrollment_final_exam_attempt_try/student_course_enrollment_final_exam_attempt_try";
+import { getCourse } from "@/src/controllers/platform/course/course";
+import { checkStudentCourseEnrollment } from "@/src/controllers/platform/student_course_enrollment/student_course_enrollment";
+import { getFinalExamQuestionsAndOptions } from "@/src/controllers/platform/course_final_exam_option_answer/course_final_exam_option_answer";
+import { getStudentCourseEnrollmentFinalExamAttemptTriesFromEnrollment } from "@/src/controllers/platform/student_course_enrollment_final_exam_attempt_try/student_course_enrollment_final_exam_attempt_try";
 
 import { useEffect, useState } from "react";
 import { useUserInfoContext } from "@/contexts/UserInfoContext";

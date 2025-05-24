@@ -30,7 +30,7 @@ export default function ScoreCard({
         <div className="w-1/2 text-right">
           <h3 className="text-lg font-semibold text-primary">Mejor Puntaje:</h3>
           <p className="text-primary">
-            {bestScore} / {maxScore} ({percentScore} %)
+            {bestScore.toFixed(2)} / {maxScore.toFixed(2)} ({percentScore} %)
           </p>
         </div>
       </div>

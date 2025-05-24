@@ -3,7 +3,7 @@
 import Button from "@/components/Button";
 import PageHeader from "@/components/page_formats/PageHeader";
 import LoadingSpinner from "@/components/LoadingSpinner";
-import { getPlatformSetting } from "@/src/models/platform/platform_setting/platform_setting";
+import { getPlatformSetting } from "@/src/controllers/platform/platform_setting/platform_setting";
 import { useEffect, useState } from "react";
 
 export default function PlatformSettingsPage() {
@@ -48,7 +48,7 @@ export default function PlatformSettingsPage() {
               </div>
               <div className="flex justify-center sm:justify-end mt-4 sm:mt-0 space-x-2">
                 <Button
-                  customClasses="px-4 py-2 bg-primary text-title-active-static rounded-md shadow-md hover:bg-secondary transition duration-300 bg-primary border-secondary-light text-title-active-static font-semibold gradient-button"
+                  customClasses="px-4 py-2 bg-primary text-title-active-static rounded-md shadow-md transition duration-300 bg-primary border-secondary-light text-title-active-static font-semibold bg-dark-mode"
                   route={"/platform/platform_settings/edit"}
                   isAnimated={false}
                   title="Editar"

@@ -1,15 +1,16 @@
 "use client";
 
-import { getCourseFinalExam } from "@/src/models/platform/course_final_exam/course_final_exam";
-import { getCourse } from "@/src/models/platform/course/course";
-import { deleteCourseFinalExamQuestion } from "@/src/models/platform/course_final_exam_question/course_final_exam_question";
+import { getCourseFinalExam } from "@/src/controllers/platform/course_final_exam/course_final_exam";
+import { getCourse } from "@/src/controllers/platform/course/course";
+import { deleteCourseFinalExamQuestion } from "@/src/controllers/platform/course_final_exam_question/course_final_exam_question";
 import {
   getFinalExamQuestionsAndOptions,
   deleteCourseFinalExamQuestionAnswer,
-} from "@/src/models/platform/course_final_exam_option_answer/course_final_exam_option_answer";
+} from "@/src/controllers/platform/course_final_exam_option_answer/course_final_exam_option_answer";
 
 import { useEffect, useState } from "react";
 import { useNotification } from "@/contexts/NotificationContext";
+import { useUserInfoContext } from "@/contexts/UserInfoContext";
 
 import {
   FiEdit,
@@ -36,6 +37,7 @@ export default function CourseFinalExamManagePage({ courseId }) {
   const [totalPoints, setTotalPoints] = useState(0);
 
   const { showNotification } = useNotification();
+  const { user } = useUserInfoContext();
 
   useEffect(() => {
     async function fetchData() {
@@ -112,7 +114,13 @@ export default function CourseFinalExamManagePage({ courseId }) {
 
   return (
     <>
-      {finalExamDetails ? (
+      {finalExamDetails &&
+      user &&
+      ((user.user_role_id === 3 &&
+        user.platform_user_business_id ===
+          courseDetails.platform_user_business_id) ||
+        user.user_role_id === 4 ||
+        user.user_role_id === 5) ? (
         <>
           <PageHeader
             title={courseDetails.name}
@@ -155,7 +163,7 @@ export default function CourseFinalExamManagePage({ courseId }) {
                   finalExamQuestionsWithAnswers.map((question) => (
                     <div key={question.id} className="w-full">
                       <div
-                        className="flex items-center justify-between bg-primary text-primary rounded-md px-6 py-3 shadow-md transition duration-300 hover:-translate-y-1 hover:bg-primary-hover-500 w-full border-primary cursor-pointer"
+                        className="flex items-center justify-between bg-primary text-primary rounded-md px-6 py-3 shadow-md transition duration-300 hover:-translate-y-1 bg-dark-mode w-full border-primary cursor-pointer"
                         onClick={() => handleToggle(question.id)}
                       >
                         {questionExpanded[question.id] ? (
@@ -199,7 +207,7 @@ export default function CourseFinalExamManagePage({ courseId }) {
                         </div>
                       </div>
                       {questionExpanded[question.id] && (
-                        <div className="mt-2 pl-4 bg-secondary rounded-lg p-4">
+                        <div className="mt-2 pl-4 bg-secondary rounded-lg p-4 bg-dark-mode">
                           {question.has_image && (
                             <>
                               {question.question_image_link && (
@@ -269,7 +277,7 @@ export default function CourseFinalExamManagePage({ courseId }) {
                                 )
                               )
                             ) : (
-                              <ul className="shadow-md rounded-lg p-1 bg-primary mt-4 relative w-full bg-secondary">
+                              <ul className="shadow-md rounded-lg p-1 bg-primary mt-4 relative w-full bg-dark-mode">
                                 <li className="text-center py-2 text-center text-gray-400">
                                   <p>No hay nada para mostrar.</p>
                                 </li>
@@ -281,7 +289,7 @@ export default function CourseFinalExamManagePage({ courseId }) {
                     </div>
                   ))
                 ) : (
-                  <ul className="shadow-md rounded-lg p-1 bg-primary mt-4 relative w-full bg-secondary">
+                  <ul className="shadow-md rounded-lg p-1 bg-primary mt-4 relative w-full bg-dark-mode">
                     <li className="text-center py-2 text-center text-gray-400">
                       <p>No hay nada para mostrar.</p>
                     </li>

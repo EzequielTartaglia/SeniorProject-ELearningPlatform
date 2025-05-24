@@ -46,7 +46,7 @@ export default function LiWithTitle({
         {hasIconRight && buttonRoute && iconRightTitle && (
           <Link href={buttonRouteTitle}>
             <button
-              className={`p-2 rounded-full text-primary shadow-md duration-300 hover:-translate-y-1 ${titleBackgroundColor}`}
+              className={`p-2 rounded-full text-blue-500 border-dark-mode bg-dark-mode shadow-md duration-300 hover:-translate-y-1 ${titleBackgroundColor}`}
               title="Administrar"
             >
               {iconRightTitle}

@@ -4,11 +4,11 @@ import {
   getStudentCourseEnrollments,
   deleteStudentCourseEnrollment,
   editStudentCourseEnrollmentStatus,
-} from "@/src/models/platform/student_course_enrollment/student_course_enrollment";
-import { getPlatformUser } from "@/src/models/platform/platform_user/platform_user";
-import { getCourse } from "@/src/models/platform/course/course";
-import { getPlatformState } from "@/src/models/platform/platform_state/platform_state";
-import { addStudentCourseEnrollmentFinalExamAttempt } from "@/src/models/platform/student_course_enrollment_final_exam_attempt/student_course_enrollment_final_exam_attempt";
+} from "@/src/controllers/platform/student_course_enrollment/student_course_enrollment";
+import { getPlatformUser } from "@/src/controllers/platform/platform_user/platform_user";
+import { getCourse } from "@/src/controllers/platform/course/course";
+import { getPlatformState } from "@/src/controllers/platform/platform_state/platform_state";
+import { addStudentCourseEnrollmentFinalExamAttempt } from "@/src/controllers/platform/student_course_enrollment_final_exam_attempt/student_course_enrollment_final_exam_attempt";
 
 import { useNotification } from "@/contexts/NotificationContext";
 import { useEffect, useState } from "react";
@@ -175,6 +175,10 @@ export default function AdminCourseEnrollmentsPage() {
   const handleSearchChange = (event) => setSearchTerm(event.target.value);
   const handleStatusChange = setStatusFilter;
 
+  const hasApprove = (item) => {
+    return;
+  };
+
   return (
     <>
       <PageHeader
@@ -218,7 +222,7 @@ export default function AdminCourseEnrollmentsPage() {
         hasShow={() => false}
         hasEdit={() => false}
         hasDelete={true}
-        hasApprove={(enrollment) => enrollment.platform_state_id === 2}
+        hasApprove={(enrollment) => enrollment.hasApprove}
         buttonDeleteRoute={handleDeleteCourseEnrollmentState}
         buttonApproveRoute={handleApproveCourseEnrollmentState}
         confirmModalText={

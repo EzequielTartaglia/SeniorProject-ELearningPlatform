@@ -1,6 +1,6 @@
 'use client';
 
-import { addCourseFinalExam } from "@/src/models/platform/course_final_exam/course_final_exam";
+import { addCourseFinalExam } from "@/src/controllers/platform/course_final_exam/course_final_exam";
 
 import { useNotification } from "@/contexts/NotificationContext";
 import { useState } from "react";

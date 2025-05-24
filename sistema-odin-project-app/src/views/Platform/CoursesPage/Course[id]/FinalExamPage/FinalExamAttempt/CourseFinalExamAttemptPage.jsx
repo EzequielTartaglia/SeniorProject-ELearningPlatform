@@ -1,14 +1,14 @@
 "use client";
 
-import { getCourseFinalExam } from "@/src/models/platform/course_final_exam/course_final_exam";
-import { getCourse } from "@/src/models/platform/course/course";
-import { getFinalExamQuestionsAndOptions } from "@/src/models/platform/course_final_exam_option_answer/course_final_exam_option_answer";
-import { checkStudentCourseEnrollment } from "@/src/models/platform/student_course_enrollment/student_course_enrollment";
+import { getCourseFinalExam } from "@/src/controllers/platform/course_final_exam/course_final_exam";
+import { getCourse } from "@/src/controllers/platform/course/course";
+import { getFinalExamQuestionsAndOptions } from "@/src/controllers/platform/course_final_exam_option_answer/course_final_exam_option_answer";
+import { checkStudentCourseEnrollment } from "@/src/controllers/platform/student_course_enrollment/student_course_enrollment";
 import {
   checkStudentCourseEnrollmentFinalExamAttempt,
   checkExpirationDate,
-} from "@/src/models/platform/student_course_enrollment_final_exam_attempt/student_course_enrollment_final_exam_attempt";
-import { getStudentCourseEnrollmentFinalExamAttemptTriesFromEnrollment } from "@/src/models/platform/student_course_enrollment_final_exam_attempt_try/student_course_enrollment_final_exam_attempt_try";
+} from "@/src/controllers/platform/student_course_enrollment_final_exam_attempt/student_course_enrollment_final_exam_attempt";
+import { getStudentCourseEnrollmentFinalExamAttemptTriesFromEnrollment } from "@/src/controllers/platform/student_course_enrollment_final_exam_attempt_try/student_course_enrollment_final_exam_attempt_try";
 
 import { useUserInfoContext } from "@/contexts/UserInfoContext";
 import { useEffect, useState } from "react";
@@ -73,9 +73,11 @@ export default function CourseFinalExamAttemptPage({ courseId, finalExamId }) {
           ? attempt.attempts_count_period
           : 0;
         const bestScore = attempt ? attempt.best_score : 0;
-        const nextActivationDate = attempt
-          ? attempt.lock_expiration_date
+        const nextActivationDate =
+        attempt?.lock_expiration_date && !isNaN(new Date(attempt.lock_expiration_date).getTime())
+          ? new Date(attempt.lock_expiration_date).toISOString().split("T")[0] 
           : null;
+      
         const isApproved = attempt ? attempt.is_approved : null;
 
         const enrollmentTriesDetails = attempt
@@ -108,8 +110,7 @@ export default function CourseFinalExamAttemptPage({ courseId, finalExamId }) {
     fetchData();
   }, [courseId, user.id]);
 
-  if (loading)
-    return <LoadingSpinner/>;
+  if (loading) return <LoadingSpinner />;
   if (error) return <p>Error: {error}</p>;
 
   const percentScore =
@@ -151,25 +152,27 @@ export default function CourseFinalExamAttemptPage({ courseId, finalExamId }) {
             }
           />
 
-          <div className="mt-4">
-            <Button
-              route={`/platform/courses/${courseId}/final_exam/${finalExamId}/attempt/${examDetails.attemptId}/new`}
-              text={
-                examDetails.totalAttemptsPerPeriod === 3
-                  ? "Intentos agotados por periodo"
-                  : examDetails.totalAttemptsPerPeriod === 0
-                  ? "Realizar examen"
-                  : "Realizar otro intento"
-              }
-              customClasses={`rounded-md ${
-                examDetails.totalAttemptsPerPeriod === 3
-                  ? "bg-gray-500 text-primary"
-                  : "bg-primary border-secondary-light text-title-active-static gradient-button"
-              } `}
-              disabled={examDetails.totalAttemptsPerPeriod === 3}
-              isAnimated={examDetails.totalAttemptsPerPeriod !== 3}
-            />
-          </div>
+          {!examDetails.isApproved && (
+            <div className="mt-4">
+              <Button
+                route={`/platform/courses/${courseId}/final_exam/${finalExamId}/attempt/${examDetails.attemptId}/new`}
+                text={
+                  examDetails.totalAttemptsPerPeriod === 3
+                    ? "Intentos agotados por periodo"
+                    : examDetails.totalAttemptsPerPeriod === 0
+                    ? "Realizar examen"
+                    : "Realizar otro intento"
+                }
+                customClasses={`rounded-md ${
+                  examDetails.totalAttemptsPerPeriod === 3
+                    ? "bg-gray-500 text-primary"
+                    : "bg-primary border-secondary-light text-title-active-static bg-dark-mode"
+                } `}
+                disabled={examDetails.totalAttemptsPerPeriod === 3}
+                isAnimated={examDetails.totalAttemptsPerPeriod !== 3}
+              />
+            </div>
+          )}
         </>
       ) : (
         <p className="text-primary">No estas inscripto a este curso.</p>

@@ -1,7 +1,7 @@
 "use client";
 
-import { getCourses } from "@/src/models/platform/course/course";
-import { getEnrollmentCountsByCourse } from "@/src/models/platform/student_course_enrollment/student_course_enrollment_insights";
+import { getCourses } from "@/src/controllers/platform/course/course";
+import { getEnrollmentCountsByCourse } from "@/src/controllers/platform/student_course_enrollment/student_course_enrollment_insights";
 
 import { useEffect, useState } from "react";
 
@@ -126,7 +126,7 @@ export default function DashboardPage() {
             customClasses={`w-full md:w-auto px-4 py-2 ${
               activeChart === "generalCounts"
                 ? "body-bg text-white border-primary-light-main"
-                : "gradient-button text-title-active-static border-secondary-light"
+                : "bg-dark-mode text-title-active-static border-secondary-light"
             }  rounded-md shadow-md transition duration-300 font-semibold`}
             customFunction={() => setActiveChart("generalCounts")}
             text={"Recuento general"}
@@ -136,7 +136,7 @@ export default function DashboardPage() {
             customClasses={`w-full md:w-auto px-4 py-2 ${
               activeChart === "revenue"
                 ? "body-bg text-white border-primary-light-main"
-                : "gradient-button text-title-active-static border-secondary-light"
+                : "bg-dark-mode text-title-active-static border-secondary-light"
             } rounded-md shadow-md transition duration-300 font-semibold`}
             customFunction={() => setActiveChart("revenue")}
             text={"Ganancias"}
@@ -146,7 +146,7 @@ export default function DashboardPage() {
             customClasses={`w-full md:w-auto px-4 py-2 ${
               activeChart === "genderByCourse"
                 ? "body-bg text-white border-primary-light-main"
-                : "gradient-button text-title-active-static border-secondary-light"
+                : "bg-dark-mode text-title-active-static border-secondary-light"
             }  rounded-md shadow-md transition duration-300 font-semibold`}
             customFunction={() => setActiveChart("genderByCourse")}
             text={"Género de usuarios (Curso)"}
@@ -156,7 +156,7 @@ export default function DashboardPage() {
             customClasses={`w-full md:w-auto px-4 py-2 ${
               activeChart === "ageByCourse"
                 ? "body-bg text-white border-primary-light-main"
-                : "gradient-button text-title-active-static border-secondary-light"
+                : "bg-dark-mode text-title-active-static border-secondary-light"
             }  rounded-md shadow-md transition duration-300 font-semibold`}
             customFunction={() => setActiveChart("ageByCourse")}
             text={"Edad de usuarios (Curso)"}
@@ -166,7 +166,7 @@ export default function DashboardPage() {
             customClasses={`w-full md:w-auto px-4 py-2 ${
               activeChart === "countryByCourse"
                 ? "body-bg text-white border-primary-light-main"
-                : "gradient-button text-title-active-static border-secondary-light"
+                : "bg-dark-mode text-title-active-static border-secondary-light"
             }  rounded-md shadow-md transition duration-300 font-semibold`}
             customFunction={() => setActiveChart("countryByCourse")}
             text={"Pais de usuarios (Curso)"}
@@ -176,7 +176,7 @@ export default function DashboardPage() {
             customClasses={`w-full md:w-auto px-4 py-2 ${
               activeChart === "enrollmentDateByCourse"
                 ? "body-bg text-white border-primary-light-main"
-                : "gradient-button text-title-active-static border-secondary-light"
+                : "bg-dark-mode text-title-active-static border-secondary-light"
             }  rounded-md shadow-md transition duration-300 font-semibold`}
             customFunction={() => setActiveChart("enrollmentDateByCourse")}
             text={"Fecha de inscripcion (Curso)"}

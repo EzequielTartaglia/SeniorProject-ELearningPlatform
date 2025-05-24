@@ -3,7 +3,7 @@
 import {
   getCourseFormats,
   deleteCourseFormat,
-} from "@/src/models/platform/course_format/course_format";
+} from "@/src/controllers/platform/course_format/course_format";
 
 import { useUserInfoContext } from "@/contexts/UserInfoContext";
 import { useEffect, useState } from "react";

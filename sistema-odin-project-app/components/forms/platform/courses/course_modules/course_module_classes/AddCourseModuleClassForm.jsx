@@ -1,10 +1,10 @@
 "use client";
 
 
-import { addCourseModuleClass } from "@/src/models/platform/course_module_class/course_module_class";
-import { getCourseFormats } from "@/src/models/platform/course_format/course_format";
-import { getCoursePlatformTools } from "@/src/models/platform/course_platform_tool/course_platform_tool";
-import { getCourseModule } from "@/src/models/platform/course_module/courses_module";
+import { addCourseModuleClass } from "@/src/controllers/platform/course_module_class/course_module_class";
+import { getCourseFormats } from "@/src/controllers/platform/course_format/course_format";
+import { getCoursePlatformTools } from "@/src/controllers/platform/course_platform_tool/course_platform_tool";
+import { getCourseModule } from "@/src/controllers/platform/course_module/courses_module";
 
 import { useNotification } from "@/contexts/NotificationContext";
 import { useState, useEffect } from "react";

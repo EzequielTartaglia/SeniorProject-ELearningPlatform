@@ -17,6 +17,19 @@ body {
   }
 }
 
+/* Dark mode */
+
+.bg-dark-mode {
+  background: linear-gradient(to top, #111827, #1f2937, #111827);
+}
+.bg-dark-mode-to-r {
+  background: linear-gradient(to right, #111827, #1f2937, #111827);
+}
+.border-dark-mode{
+  border: 1px solid #3B82F6; 
+}
+
+
 /* Custom */
 
 .body-bg{
@@ -98,7 +111,7 @@ body {
 }
 
 .border-card-detail{
-  border: 1px solid rgba(var(--foreground-rgb), 0.25);
+  border: 1px solid #3B82F6; 
 }
 
 .text-primary,.text-title {
@@ -204,13 +217,28 @@ body {
   box-shadow: 0 4px 14px rgba(var(--foreground-rgb), 0.15);
   border-radius: 1rem;
   padding: 1.5rem;
-  background-image: linear-gradient(to right, var(--bg-primary), var(--bg-secondary), var(--bg-primary));
+  background: linear-gradient(to top, #111827, #1f2937, #111827);
   margin-top: 1rem;
   position: relative;
   width: 100%;
   max-width: 100%;
   color: var(--text-primary);
-  border: 1px solid rgba(var(--foreground-rgb), 0.25);
+  border: 1px solid #3B82F6; 
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.box-theme-home {
+  box-shadow: 0 4px 14px rgba(var(--foreground-rgb), 0.15);
+  padding: 1.5rem;
+  background-color: #032e57;
+  margin-top: 1rem;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  color: var(--text-primary);
+  border: 1px solid #3B82F6; 
+  border-radius: 6px;
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
@@ -218,26 +246,26 @@ body {
 .card-theme {
   box-shadow: 0 4px 14px rgba(var(--foreground-rgb), 0.15);
   padding: 1.5rem;
-  background-image: linear-gradient(to right, var(--bg-primary), var(--bg-secondary), var(--bg-primary));
+  background: linear-gradient(to top, #111827, #1f2937, #111827);
   margin-top: 1rem;
   position: relative;
   width: 100%;
   max-width: 100%;
   color: var(--text-primary);
-  border: 1px solid rgba(var(--foreground-rgb), 0.25);
+  border: 1px solid #3B82F6; 
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .li-theme{
   box-shadow: 0 4px 14px rgba(var(--foreground-rgb), 0.15);
-  background-image: linear-gradient(to right, var(--bg-primary), var(--bg-secondary), var(--bg-primary));
+  background: linear-gradient(to top, #111827, #1f2937, #111827);
   margin-top: 1rem;
   position: relative;
   width: 100%;
   max-width: 100%;
   color: var(--text-primary);
-  border: 1px solid rgba(var(--foreground-rgb), 0.25);
+  border: 1px solid #3B82F6; 
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
@@ -246,13 +274,13 @@ body {
   box-shadow: 0 4px 14px rgba(var(--foreground-rgb), 0.15);
   border-radius: 1rem;
   padding: 1.5rem;
-  background-image: linear-gradient(to right, var(--bg-primary), var(--bg-secondary), var(--bg-primary));
+  background: linear-gradient(to top, #111827, #1f2937, #111827);
   margin-top: 1rem;
   position: relative;
   width: 100%;
   max-width: 100%;
   color: var(--text-primary);
-  border: 1px solid rgba(var(--foreground-rgb), 0.25);
+  border: 1px solid #3B82F6; 
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
@@ -261,7 +289,7 @@ body {
   position: absolute; 
   top: 0; 
   right: 0; 
-  background-image: linear-gradient(to right, var(--bg-primary), var(--bg-secondary), var(--bg-primary));
+  background: linear-gradient(to top, #111827, #1f2937, #111827);
   color: var(--text-title-active);
   border: solid 1px var(--border-secondary-light);
   padding-left: 0.75rem; 
@@ -327,7 +355,7 @@ html {
   max-width: 100%;
   margin-left: auto; 
   margin-right: auto;
-  background-image: linear-gradient(to right, var(--bg-primary), var(--bg-secondary), var(--bg-primary));
+  background: linear-gradient(to top, #111827, #1f2937, #111827);
   border: 1px solid rgba(var(--foreground-rgb), 0.25);
   backdrop-filter: blur(10px);
   position: relative; 

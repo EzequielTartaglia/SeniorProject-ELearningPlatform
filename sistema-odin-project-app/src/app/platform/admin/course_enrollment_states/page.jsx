@@ -3,11 +3,11 @@ import NotPermissionPage from "@/src/views/Platform/NotPermissionPage/NotPermiss
 import AdminCourseEnrollmentsPage from "@/src/views/Platform/Admin/AdminCourseEnrollments/AdminCourseEnrollmentsPage";
 
 export default function Enrollements() {
-    return (
-        <ConditionalSessionRender
-            AuthorizedUserRoles={[3, 4]}
-            ComponentIfUser={<AdminCourseEnrollmentsPage/>}
-            ComponentIfNoUser={<NotPermissionPage/>}   
-        />
-    );
+  return (
+    <ConditionalSessionRender
+      AuthorizedUserRoles={[3, 4, 5]}
+      ComponentIfUser={<AdminCourseEnrollmentsPage />}
+      ComponentIfNoUser={<NotPermissionPage />}
+    />
+  );
 }

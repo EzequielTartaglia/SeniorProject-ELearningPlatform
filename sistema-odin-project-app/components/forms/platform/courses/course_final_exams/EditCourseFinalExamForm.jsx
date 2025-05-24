@@ -3,8 +3,8 @@
 import {
   getCourseFinalExam,
   editCourseFinalExam,
-} from "@/src/models/platform/course_final_exam/course_final_exam";
-import { getCourse } from "@/src/models/platform/course/course";
+} from "@/src/controllers/platform/course_final_exam/course_final_exam";
+import { getCourse } from "@/src/controllers/platform/course/course";
 
 import { useNotification } from "@/contexts/NotificationContext";
 import { useEffect, useState } from "react";

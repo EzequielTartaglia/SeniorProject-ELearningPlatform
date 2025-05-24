@@ -1,7 +1,7 @@
 "use client";
 
-import { addCourseFinalExamQuestion } from "@/src/models/platform/course_final_exam_question/course_final_exam_question";
-import { getCourseFinalExam } from "@/src/models/platform/course_final_exam/course_final_exam";
+import { addCourseFinalExamQuestion } from "@/src/controllers/platform/course_final_exam_question/course_final_exam_question";
+import { getCourseFinalExam } from "@/src/controllers/platform/course_final_exam/course_final_exam";
 
 import { useNotification } from "@/contexts/NotificationContext";
 import { useState, useEffect } from "react";

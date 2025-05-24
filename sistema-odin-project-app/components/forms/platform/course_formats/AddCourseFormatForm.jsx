@@ -1,6 +1,6 @@
 "use client";
 
-import { addCourseFormat } from "@/src/models/platform/course_format/course_format";
+import { addCourseFormat } from "@/src/controllers/platform/course_format/course_format";
 
 import { useNotification } from "@/contexts/NotificationContext";
 import { useState } from "react";
@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 import Input from "@/components/forms/Input";
 import PageHeader from "@/components/page_formats/PageHeader";
-import SubmitLoadingButton from "../../SubmitLoadingButton";
+import SubmitLoadingButton from "@/components/forms/SubmitLoadingButton";
 
 export default function AddCourseFormatForm() {
   const [courseFormat, setCourseFormat] = useState({

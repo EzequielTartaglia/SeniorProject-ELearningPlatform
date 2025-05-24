@@ -7,7 +7,8 @@ export default function CourseDetailsCard({
   level,
   description,
   totalTime,
-  imageUrl
+  imageUrl,
+  professor,
 }) {
   const sortedModules = moduleList.sort((a, b) => a.id - b.id);
 
@@ -15,7 +16,10 @@ export default function CourseDetailsCard({
     <div className="box-theme shadow-lg rounded-lg overflow-hidden">
       <div className="relative w-full h-64 lg:h-80 bg-secondary rounded-t-lg overflow-hidden">
         <Image
-          src={imageUrl || "https://i.ibb.co/9rfGxfH/course-preview-link-placeholder.png"}
+          src={
+            imageUrl ||
+            "https://i.ibb.co/9rfGxfH/course-preview-link-placeholder.png"
+          }
           alt="Course Image"
           layout="fill"
           objectFit="cover"
@@ -25,30 +29,51 @@ export default function CourseDetailsCard({
       <div className="p-6 space-y-6">
         {level && (
           <div className="text-primary">
-            <h3 className="text-lg font-bold mb-2 text-title-active-static">Nivel</h3>
+            <h3 className="text-lg font-bold mb-2 text-title-active-static">
+              Nivel
+            </h3>
             <p className="leading-relaxed font-semibold">{level}</p>
           </div>
         )}
         {totalTime && (
           <div>
-            <h3 className="text-lg font-bold mb-2 text-title-active-static">Duración</h3>
+            <h3 className="text-lg font-bold mb-2 text-title-active-static">
+              Duración
+            </h3>
             <div className="flex items-center text-primary mb-4">
               <FaClock className="mr-2" size={20} />
               <p className="leading-relaxed font-semibold">{totalTime}</p>
             </div>
           </div>
         )}
+
+        {professor && (
+          <div className="text-primary">
+            <h3 className="text-lg font-bold mb-2 text-title-active-static">
+              Profesor
+            </h3>
+            <p className="leading-relaxed font-semibold">
+              {professor.first_name}
+            </p>
+          </div>
+        )}
+
         {description && (
           <div>
-            <h3 className="text-lg font-bold mb-2 text-title-active-static">Información General</h3>
-            <p className="text-primary p-4 bg-white shadow-md rounded-md leading-relaxed font-semibold whitespace-pre-wrap">
+            <h3 className="text-lg font-bold mb-2 text-title-active-static">
+              Información General
+            </h3>
+            <p className="text-title-active-static p-4 bg-white shadow-md rounded-md leading-relaxed font-semibold whitespace-pre-wrap">
               {parseTextWithColor(description)}
             </p>
           </div>
         )}
+
         {sortedModules.length > 0 && (
           <div>
-            <h3 className="text-lg font-bold mb-2 text-title-active-static">Contenidos</h3>
+            <h3 className="text-lg font-bold mb-2 text-title-active-static">
+              Contenidos
+            </h3>
             <ul className="space-y-2">
               {sortedModules.map((module) => (
                 <li
@@ -56,8 +81,13 @@ export default function CourseDetailsCard({
                   className="flex flex-col p-4 bg-white shadow-md rounded-md text-title-active-static"
                 >
                   <div className="flex items-start">
-                    <FaArrowCircleRight className="mt-1 mr-2 text-primary" size={20} />
-                    <span className="font-semibold text-lg">{module.title}</span>
+                    <FaArrowCircleRight
+                      className="mt-1 mr-2 text-primary"
+                      size={20}
+                    />
+                    <span className="font-semibold text-lg">
+                      {module.title}
+                    </span>
                   </div>
                   {module.description && (
                     <p className="text-md text-gray-800 ml-8 font-semibold whitespace-pre-wrap">

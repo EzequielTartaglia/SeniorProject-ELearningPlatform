@@ -6,7 +6,11 @@ const ConditionalSessionRender = ({ ComponentIfUser, ComponentIfNoUser, Authoriz
     const { user } = useUserInfoContext();
 
     if (!user) {
-        console.log('No user found');
+        
+        setTimeout(() => {
+            console.log('No user found');
+        }, 1000);
+
         return ComponentIfNoUser;
     }
 

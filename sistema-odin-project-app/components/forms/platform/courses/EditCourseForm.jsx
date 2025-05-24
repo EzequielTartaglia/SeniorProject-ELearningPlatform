@@ -1,39 +1,52 @@
 "use client";
 
-import { getCourse, editCourse } from "@/src/models/platform/course/course";
-import { getCurrencyTypes } from "@/src/models/platform/currency_type/currency_type";
-import { getCourseLevels } from "@/src/models/platform/course_level/course_level";
-import { getPaymentMethods } from "@/src/models/platform/payment_method/payment_method";
+import {
+  getCourse,
+  editCourse,
+} from "@/src/controllers/platform/course/course";
+import { getCurrencyTypes } from "@/src/controllers/platform/currency_type/currency_type";
+import { getCourseLevels } from "@/src/controllers/platform/course_level/course_level";
+import { getPaymentMethods } from "@/src/controllers/platform/payment_method/payment_method";
+import {
+  getPlatformProfessorUsers,
+  getPlatformProfessorUsersFromBusiness,
+} from "@/src/controllers/platform/platform_user/platform_professor_user";
 
 import { useNotification } from "@/contexts/NotificationContext";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useUserInfoContext } from "@/contexts/UserInfoContext";
 
 import Input from "@/components/forms/Input";
 import PageHeader from "@/components/page_formats/PageHeader";
 import CheckboxInput from "../../CheckboxInput";
-import SubmitLoadingButton from "../../SubmitLoadingButton";
+import SubmitLoadingButton from "@/components/forms/SubmitLoadingButton";
 import SelectInput from "../../SelectInput";
-import TextArea from "../../TextArea";
+import TextArea from "@/components/forms/TextArea";
 import Button from "@/components/Button";
 import { FiTrash2 } from "react-icons/fi";
 import FileInput from "../../FileInput";
 import Image from "next/image";
+import { FaExclamationTriangle } from "react-icons/fa";
 
 export default function EditCourse({ courseId }) {
+  const { user } = useUserInfoContext();
+
   const [course, setCourse] = useState({
-    id: "",
+    id: courseId,
     name: "",
-    has_final_exam: false,
-    is_paid: false,
+    has_final_exam: true,
+    is_paid: true,
     payment_methods: [],
     course_level_id: null,
     description: "",
     image_preview_link: "",
+    professor_id: null,
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [hasAccess, setHasAccess] = useState(false);
   const [formErrors, setFormErrors] = useState({});
 
   const router = useRouter();
@@ -42,38 +55,73 @@ export default function EditCourse({ courseId }) {
   const [currencyTypesTable, setCurrencyTypesTable] = useState([]);
   const [courseLevelsTable, setCourseLevelsTable] = useState([]);
   const [paymentMethodsTable, setPaymentMethodsTable] = useState([]);
+  const [professorsTable, setProfessorsTable] = useState([]);
 
   useEffect(() => {
     const fetchCourse = async () => {
       try {
         const fetchedCourse = await getCourse(courseId);
+  
         setCourse({
           ...fetchedCourse,
-          payment_methods: JSON.parse(fetchedCourse.payment_methods) || [], // Parse JSON string to array
+          payment_methods: JSON.parse(fetchedCourse.payment_methods) || [],
         });
-
-        const currencyTypes = await getCurrencyTypes();
+  
+        const [currencyTypes, courseLevels, paymentMethods] = await Promise.all([
+          getCurrencyTypes(),
+          getCourseLevels(),
+          getPaymentMethods(),
+        ]);
+  
         setCurrencyTypesTable(currencyTypes.filter((type) => type.id !== 1));
-
-        const courseLevels = await getCourseLevels();
         setCourseLevelsTable(courseLevels);
-
-        const paymentMethods = await getPaymentMethods();
         setPaymentMethodsTable(paymentMethods);
       } catch (error) {
-        console.error("Error al obtener el curso:", error.message);
+        console.error("Error al obtener el curso:", error);
       }
     };
+  
     fetchCourse();
   }, [courseId]);
-
+  
+  useEffect(() => {
+    const filterData = async () => {
+      if (!user || !course?.platform_user_business_id) return;
+  
+      try {
+        if (user.user_role_id === 3) {
+          if (course.platform_user_business_id !== user.platform_user_business_id) {
+            setHasAccess(false);
+            return;
+          }
+          setHasAccess(true);
+        } else if (user.user_role_id === 4 || user.user_role_id === 5) {
+          setHasAccess(true);
+        }
+  
+        const filteredProfessors =
+          user.user_role_id === 3
+            ? await getPlatformProfessorUsersFromBusiness(parseInt(user.platform_user_business_id))
+            : await getPlatformProfessorUsers();
+  
+        setProfessorsTable(filteredProfessors);
+      } catch (error) {
+        console.error("Error al obtener datos de los profesores:", error);
+      }
+    };
+  
+    if (course?.id) {
+      filterData();
+    }
+  }, [course, user]); 
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitted(true);
 
     let errors = {};
 
-    if (!course.name) {
+    if (!course.name || course.name.length === 0) {
       errors.name = "Campo obligatorio";
     }
 
@@ -102,7 +150,8 @@ export default function EditCourse({ courseId }) {
         JSON.stringify(course.payment_methods),
         course.course_level_id,
         course.description,
-        course.image_preview_link
+        course.image_preview_link,
+        course.professor_id
       );
 
       showNotification("¡Curso editado exitosamente!", "success");
@@ -176,6 +225,29 @@ export default function EditCourse({ courseId }) {
     console.log(event.target.files[0]);
   };
 
+  if (!hasAccess) {
+    return (
+      <div className="flex flex-col justify-center items-center h-screen ">
+        <div className="flex flex-col items-center p-6 card-theme border-secondary-light rounded-md shadow-lg">
+          <FaExclamationTriangle className="text-red-500 text-6xl mb-4" />
+          <h1 className="text-red-600 text-3xl font-semibold mb-2">
+            Acceso denegado
+          </h1>
+          <p className="text-white text-center">
+            Lo sentimos, no tienes permiso para acceder a esta página. Si crees
+            que esto es un error, contacta al administrador.
+          </p>
+          <button
+            className="mt-4 px-4 py-2 bg-primary text-title-active-static rounded-md shadow-md transition duration-300 bg-primary border-secondary-light text-title-active-static font-semibold bg-dark-mode "
+            onClick={() => (window.location.href = "/platform")}
+          >
+            Volver al inicio
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <>
       <PageHeader
@@ -206,6 +278,20 @@ export default function EditCourse({ courseId }) {
           note="El texto ingresado aparecerá públicamente en el preview y en la información del curso."
           hasHightlightTexts={true}
         />
+
+        <div className="mt-1">
+          <SelectInput
+            label="Profesor"
+            name="professor_id"
+            value={course.professor_id}
+            onChange={handleInputChange}
+            isSubmitted={isSubmitted}
+            table={professorsTable}
+            columnName="first_name"
+            columnName2="last_name"
+            idColumn="id"
+          />
+        </div>
 
         <div className="mt-1 mb-[-10px]">
           <SelectInput

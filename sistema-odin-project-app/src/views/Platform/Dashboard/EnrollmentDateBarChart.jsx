@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from "react";
-import { getEnrollmentCountsByCourse } from "@/src/models/platform/student_course_enrollment/student_course_enrollment_insights";
+import { getEnrollmentCountsByCourse } from "@/src/controllers/platform/student_course_enrollment/student_course_enrollment_insights";
 import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js';
 

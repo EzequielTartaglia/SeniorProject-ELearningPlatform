@@ -1,6 +1,6 @@
 "use client";
 
-import { changeUserPassword } from "@/src/models/platform/platform_user/platform_user";
+import { changeUserPassword } from "@/src/controllers/platform/platform_user/platform_user";
 import { useState } from "react";
 import { useNotification } from "@/contexts/NotificationContext";
 import { useRouter } from "next/navigation";
