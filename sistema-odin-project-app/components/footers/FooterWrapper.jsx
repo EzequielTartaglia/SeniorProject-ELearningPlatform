@@ -4,12 +4,21 @@ import { usePathname } from 'next/navigation';
 
 import BaseFooter from './BaseFooter';
 import PlatformFooter from './platform/PlatformFooter';
+import ControlCenterFooter from './control_center/ControlCenterFooter';
 
 export default function FooterWrapper() {
   const pathname = usePathname();
   const isPlatformRoute = pathname && pathname.includes('/platform');
+  const isControlCenterRoute = pathname && pathname.includes('/control_center');
 
-  return isPlatformRoute ? <FooterPlataform /> : <Footer />;
+  if (isPlatformRoute) {
+    return <FooterPlataform/>
+  } if (isControlCenterRoute) {
+    return <FooterControlCenter/>
+  } else {
+    return <Footer />
+  }
+
 }
 
 export function Footer() {
@@ -30,4 +39,14 @@ export function FooterPlataform() {
   ];
 
   return <PlatformFooter items={items} />;
+}
+
+export function FooterControlCenter() {
+  const items = [
+    { route: "#aboutUsSection", text: "Sobre nosotros" },
+    { route: "#servicesSection", text: "Servicios" },
+    { route: "#contactUsSection", text: "Contactanos" },
+  ];
+
+  return <ControlCenterFooter items={items} />;
 }
