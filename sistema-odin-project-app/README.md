@@ -8,12 +8,6 @@ Crear projecto en nextjs con PostgreSQL
 
 4) Configurar la conexion en utils y asignar las .envs
 
-//desarrollos.odin@gmail.com
-//sistema_odin_db_Developer.500
-
-//sistemas.bohemian@gmail.com
-//bohemian_db_Developer.500
-
 //sistemas.daslabor@gmail.com
 //das_labor_db_Developer.500
 
