@@ -26,7 +26,7 @@ Ezequiel Matias Tartaglia, Thompson Arnold Nkomo, Josue Sinaca Gomez, Irvin Jose
   - Irvin Jose Silva:
 
   ```bash
-  
+    "We are what we repeatedly do. Excellence, then, is not an act, but a habit." -  Aristotle
   ```
 
 ## Purpose
