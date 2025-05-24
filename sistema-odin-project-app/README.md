@@ -8,8 +8,8 @@ Crear projecto en nextjs con PostgreSQL
 
 4) Configurar la conexion en utils y asignar las .envs
 
-//sistemas.daslabor@gmail.com
-//das_labor_db_Developer.500
+//desarrollos.odin@gmail.com
+//sistema_odin_db_Developer.500
 
 5) Crear una cuenta en IMGBB y asignar la apikey a NEXT_PUBLIC_IMGBB_API_KEY
     - Crear cuenta en https://imgbb.com/
