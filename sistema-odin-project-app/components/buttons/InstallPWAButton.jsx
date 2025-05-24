@@ -40,7 +40,7 @@ const InstallPWAButton = () => {
   return (
     deferredPrompt && (
       <Button
-        customClasses="px-4 py-2 bg-primary text-title-active-static rounded-md shadow-md hover:bg-secondary transition duration-300 bg-primary border-secondary-light text-title-active-static font-semibold gradient-button"
+        customClasses="px-4 py-2 bg-primary text-title-active-static rounded-md shadow-md hover:bg-secondary transition duration-300 bg-primary border-secondary-light text-title-active-static font-semibold bg-dark-mode"
         text={
           <>
             <FaDesktop className="inline-block mr-2" /> Descargar {systemName}

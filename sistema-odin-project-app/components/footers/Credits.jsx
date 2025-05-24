@@ -19,10 +19,29 @@ export default function Credits({paddingClass = 'p-1'}) {
   const currentYear = new Date().getFullYear();
 
   return (
-    <div className={`bg-secondary text-primary ${paddingClass} text-center font-semibold`}>
+    <div className={`bg-dark-mode-to-r ${paddingClass} text-center font-semibold`}>
+      <div className="hidden sm:block">
+        {systemName}&#174; | Desarrollado por
+        <Link
+          href={developerInfo.linkedin}
+          className="text-title-active inline-flex items-center justify-center mx-1"
+        >
+          {developerInfo.name} {middleInitial}. {developerInfo.surname}
+        </Link>
+        | Todos los derechos reservados 2024 - {currentYear}&copy;
+      </div>
       <div className="block sm:hidden">
         <div>{systemName}&#174;</div>
-        <div>Todos los derechos reservados {currentYear}&copy;</div>
+        <div>
+          Desarrollado por
+          <Link
+            href={developerInfo.linkedin}
+            className="text-title-active inline-flex items-center justify-center mx-1"
+          >
+            {developerInfo.name} {middleInitial}. {developerInfo.surname}
+          </Link>
+        </div>
+        <div>Todos los derechos reservados 2024 - {currentYear}&copy;</div>
       </div>
     </div>
   );

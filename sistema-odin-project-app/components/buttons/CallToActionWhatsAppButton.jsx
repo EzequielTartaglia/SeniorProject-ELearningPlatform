@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getPlatformSetting } from "@/src/models/platform/platform_setting/platform_setting";
+import { getPlatformSetting } from "@/src/controllers/platform/platform_setting/platform_setting";
 import { FaWhatsapp } from "react-icons/fa";
 import Button from "../Button";
 
